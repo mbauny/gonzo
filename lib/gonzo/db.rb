@@ -9,8 +9,8 @@ class Db
   def initialize src_dir
     @src_dir = src_dir
     
-    yearSections = Hash.new { |h, year| h[year] = Section.new year }
-    tagsSections = Hash.new { |h, tag| h[tag] = Section.new(tag, :long) }
+    yearSections = Hash.new { |h, year| h[year] = YearSection.new year }
+    tagsSections = Hash.new { |h, tag| h[tag] = TagSection.new tag }
     
     # Looking for post files...
     # TODO: Clean this loop

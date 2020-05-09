@@ -20,8 +20,8 @@ class TestSection < Test::Unit::TestCase
 
     entries = [
       "## Short Entries\n",
-      @@POST1.to_s,
-      @@POST2.to_s
+      "- [Nov 05] #{@@POST1.title}",
+      "- [Jan 22] #{@@POST2.title}"
     ].join "\n"
     assert_equal( entries, section.to_s )
   end
@@ -32,8 +32,8 @@ class TestSection < Test::Unit::TestCase
 
     entries = [
       "## Long Entries\n",
-      (@@POST1.to_s :long),
-      (@@POST2.to_s :long)
+      "- [Nov 05, 2019] #{@@POST1.title}",
+      "- [Jan 22, 2020] #{@@POST2.title}"
     ].join "\n"
     assert_equal( entries, section.to_s )
   end
