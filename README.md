@@ -8,10 +8,10 @@ Gonzo is a static blog *engine*. This is probably a bit of an overstatement as G
 Gonzo was implemented...
 - To be **highly opinionated**
 - To be **content oriented**
-- With absolutely **ZERO** consideration for styling
+- With absolutely **ZERO** consideration for esthetics
 - To take advantage of **GitHub**'s markdown facilities
-- To get rid of Jekyll's stupid naming conventions (well, of Jekyll, as a matter of fact)
+- To get rid of Jekyll
 - As **an experiment to learn [Ruby](https://www.ruby-lang.org/en/)**
 - In a few hours
 
-All this to say that you probably should not be using Gonzo for anything serious. Other than that, feel free to try it out :man_shrugging :woman_shrugging
+All this to say that you probably should not be using Gonzo for anything serious. Other than that, feel free to try it out :shrug:
