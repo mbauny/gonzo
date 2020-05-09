@@ -1,4 +1,4 @@
-require 'gonzo/post'
+require 'gonzo/index'
 
 class Db
   attr_reader :posts
@@ -36,7 +36,8 @@ class Db
   
   def build
     # Looking for post files...
-    Dir.glob("#{@src_dir}/_posts/*.md").each { | file_path |
+    Dir.glob("#{@src_dir}/posts/*.md").each do |file_path|
+      next if file_path.end_with? 'README.md'
 
       post = Post.new file_path
       @posts << post
@@ -46,7 +47,7 @@ class Db
       post.tags.each do |tag|
         append @posts_per_tag, tag, post
       end
-    }
+    end
 
     @posts.sort_by(&:date)
   end

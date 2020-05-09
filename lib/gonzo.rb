@@ -1,14 +1,19 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << './lib'
 
-require 'gonzo/cli'
+require 'gonzo/db'
+require 'gonzo/writer'
 
-puts "Gonzo says 'hi'"
+dir = ARGV.empty? ? Dir.pwd : ARGV[0]
+# TODO: use dir
+dir = '/Users/mbauny/sources/gonzo/tests/samples'
 
-cli = Cli.new
-cli.run
+if File.directory? dir
+  db = Db.new dir
+  db.build
 
-# init
-# cannot init if non empty
-# cannot init if gonzo.rc is present
-# gonzo.rc contains name, author, url?
+  writer = Writer.new db, dir
+  writer.write
+else
+  puts "[GONZO] Error #{dir} is not a directory."
+end

@@ -1,4 +1,5 @@
 require 'gonzo/db'
+require 'gonzo/index'
 
 class Writer
   def initialize db, out_dir
@@ -6,42 +7,32 @@ class Writer
     @out_dir = out_dir
   end
 
-  def writeIndexFile dir, lines
+  def writeIndexFile dir, text
     full_dir = File.join @out_dir, dir
     Dir.mkdir full_dir if !File.exists? full_dir
     file = File.join full_dir, 'README.md'
-    File.write file, (lines.join "\n")
+    File.write file, text
   end
 
   def write
-    # Global post index.
-    posts_page = ["# Posts"]
-    @db.years.each do |year|
-      posts_page << "\n## #{year}\n"
-      
-      posts = @db.postsPerYear year
-      posts.each do |post|
-        posts_page << "- [#{post.date.strftime "%b %e"}]"
-      end
+    postsIndex = Index.new 'Posts'
+    @db.years.reverse.each do |year|
+      yearSection = Section.new year
+      (@db.postsPerYear year)
+      .reverse
+      .each { |post| yearSection << post }
+      postsIndex << yearSection
     end
-    
-    writeIndexFile 'posts', posts_page
-    
-    # Global tag index.
-    tags_page = ["# Tags"]
+    writeIndexFile 'posts', postsIndex.to_s
+
+    tagsIndex = Index.new 'Tags'
     @db.tags.each do |tag|
-      tags_page << "\n## #{tag}\n"
-
-      # Single tag index.
-      tag_page = ["# #{tag}\n"]
-
-      posts = (@db.postsPerTag tag).map { |post| "- [#{post.date.strftime "%b %e, %Y"}]" }
-      tags_page << posts
-      tag_page << posts
-
-      writeIndexFile (File.join 'tags', tag), tag_page
+      tagSection = Section.new tag
+      (@db.postsPerTag tag)
+      .reverse
+      .each { |post| tagSection << post }
+      tagsIndex << tagSection
     end
-    
-    writeIndexFile 'tags', tags_page
+    writeIndexFile 'tags', (tagsIndex.to_s :long)
   end
 end
