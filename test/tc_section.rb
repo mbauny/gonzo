@@ -1,9 +1,6 @@
 require "test/unit"
 require_relative '../lib/gonzo/index'
 
-# POST1 = Post.new './tests/samples/posts/blocking-qobjects-signals.md'
-# POST2 = Post.new './tests/samples/posts/debugging-jest-tests-on-windows-using-vscode.md'
-
 class TestSection < Test::Unit::TestCase
   def test_to_s_empty
     section = Section.new 'Section'

@@ -6,7 +6,7 @@ require 'gonzo/writer'
 
 dir = ARGV.empty? ? Dir.pwd : ARGV[0]
 # TODO: use dir
-dir = '/Users/mbauny/sources/gonzo/tests/samples'
+dir = '/Users/mbauny/sources/gonzo/test/samples'
 
 if File.directory? dir
   db = Db.new dir
