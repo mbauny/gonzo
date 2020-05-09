@@ -1,8 +1,6 @@
 ---
-layout: post
 title: 'Blocking QObjects signals'
 date: 2019-11-05
-categories: [dev]
 tags: [C++, Qt]
 ---
 

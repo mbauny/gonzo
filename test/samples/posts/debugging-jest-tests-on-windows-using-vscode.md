@@ -1,8 +1,6 @@
 ---
-layout: post
 title: 'Debugging Jest tests on Windows using VSCode'
 date: 2020-01-22
-categories: [dev]
 tags: [JavaScript, Jest, VSCode]
 ---
 
