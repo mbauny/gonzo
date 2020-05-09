@@ -25,7 +25,7 @@ We have a Visual Studio Code [launch configuration](https://code.visualstudio.co
 }
 ```
 
-Unfortunatly, **it was not portable** :scream:
+Unfortunately, **it was not portable** :scream:
 
 :heavy_check_mark: On **MacOS**, everything worked fine: hit <kbd>F5</kbd> and the current test would run, stopping at each breakpoint.
 
