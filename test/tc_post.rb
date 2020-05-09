@@ -1,5 +1,5 @@
 require "test/unit"
-require_relative '../lib/gonzo/index'
+require_relative '../lib/gonzo/post'
 
 class TestPost < Test::Unit::TestCase
   def test_new

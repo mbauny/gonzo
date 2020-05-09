@@ -1,4 +1,6 @@
 require "test/unit"
+require_relative '../lib/gonzo/post'
+require_relative '../lib/gonzo/section'
 require_relative '../lib/gonzo/index'
 
 class TestIndex < Test::Unit::TestCase

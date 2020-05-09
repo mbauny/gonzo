@@ -1,5 +1,6 @@
 require "test/unit"
-require_relative '../lib/gonzo/index'
+require_relative '../lib/gonzo/post'
+require_relative '../lib/gonzo/section'
 
 class TestSection < Test::Unit::TestCase
   @@POST1 = Post.new './test/samples/posts/blocking-qobjects-signals.md'
