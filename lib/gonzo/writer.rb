@@ -15,24 +15,7 @@ class Writer
   end
 
   def write
-    postsIndex = Index.new 'Posts'
-    @db.years.reverse.each do |year|
-      yearSection = Section.new year
-      (@db.postsPerYear year)
-      .reverse
-      .each { |post| yearSection << post }
-      postsIndex << yearSection
-    end
-    writeIndexFile 'posts', postsIndex.to_s
-
-    tagsIndex = Index.new 'Tags'
-    @db.tags.each do |tag|
-      tagSection = Section.new tag
-      (@db.postsPerTag tag)
-      .reverse
-      .each { |post| tagSection << post }
-      tagsIndex << tagSection
-    end
-    writeIndexFile 'tags', (tagsIndex.to_s :long)
+    writeIndexFile('posts', @db.postsIndex.to_s)
+    writeIndexFile('tags', @db.tagsIndex.to_s)
   end
 end

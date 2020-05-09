@@ -4,17 +4,17 @@ require 'yaml'
 class Post
   attr_reader :title
   attr_reader :date
-  attr_reader :year
-  # attr_reader :file_path
   attr_reader :tags
 
   def initialize file_path
-    # @file_path = file_path
     yaml = YAML.load_file file_path
     @title = yaml['title']
     @date = yaml['date']
-    @year = @date.year
     @tags = yaml['tags']
+  end
+
+  def year
+    @date.year
   end
 
   def to_s fmt = :short
@@ -31,8 +31,11 @@ class Post
 end
 
 class Section
-  def initialize title
+  attr_reader :title
+  
+  def initialize title, fmt = :short
     @title = title
+    @fmt = fmt
     @posts = []
   end
 
@@ -40,9 +43,9 @@ class Section
     @posts << post
   end
 
-  def to_s fmt = :short
+  def to_s
     lines = ["## #{@title}\n"]
-    lines << @posts.map { |post| post.to_s fmt }
+    lines << @posts.map { |post| post.to_s @fmt }
     lines.join "\n"
   end
 end
@@ -57,9 +60,9 @@ class Index
     @sections << section
   end
 
-  def to_s fmt = :short
+  def to_s
     lines = ["# #{@title}\n"]
-    lines << @sections.map { |section|  "#{section.to_s fmt}\n" }
+    lines << @sections.map { |section| "#{section.to_s}\n" }
     lines.join "\n"
   end
 end
