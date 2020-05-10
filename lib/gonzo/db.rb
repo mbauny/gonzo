@@ -1,8 +1,9 @@
 require 'gonzo/index'
 require 'gonzo/post'
-require 'gonzo/section'
+require 'gonzo/post_section'
 
 class Db
+  attr_reader :mainIndex
   attr_reader :postsIndex
   attr_reader :tagsIndex
 
@@ -11,7 +12,7 @@ class Db
     
     yearSections = Hash.new { |h, year| h[year] = YearSection.new year }
     tagsSections = Hash.new { |h, tag| h[tag] = TagSection.new tag }
-    
+
     # Looking for post files...
     # TODO: Clean this loop
     Dir.glob("#{@src_dir}/posts/*.md").each do |file_path|
@@ -27,5 +28,18 @@ class Db
 
     @tagsIndex = Index.new 'Tags'
     tagsSections.each { |k, section| @tagsIndex << section }
+
+    latestSection = LatestSection.new
+    for section in postsIndex.sections
+      break if latestSection.full?
+
+      for post in section.posts
+        break if latestSection.full?
+        latestSection << post
+      end
+    end
+
+    @mainIndex = Index.new 'Welcome!'
+    @mainIndex << latestSection if !latestSection.empty?
   end
 end

@@ -1,4 +1,6 @@
 class Index
+  attr_reader :sections
+
   def initialize title
     @title = title
     @sections = []

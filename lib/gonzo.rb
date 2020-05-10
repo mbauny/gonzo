@@ -7,6 +7,7 @@ require 'gonzo/index'
 class Gonzo
   def run dir
     db = Db.new dir
+    writeIndexFile((File.join dir, ''), db.mainIndex.to_s)
     writeIndexFile((File.join dir, 'posts'), db.postsIndex.to_s)
     writeIndexFile((File.join dir, 'tags'), db.tagsIndex.to_s)
   end
