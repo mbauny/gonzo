@@ -1,8 +1,12 @@
 require 'gonzo/index'
 require 'gonzo/post'
 require 'gonzo/post_section'
+require 'gonzo/text_section'
 
 class Db
+  @@BLOG_TITLE = "Matthieu Bauny's personal homepage"
+  @@BLOG_TAGLINE = 'Meet the engineer'
+
   attr_reader :mainIndex
   attr_reader :postsIndex
   attr_reader :tagsIndex
@@ -39,7 +43,18 @@ class Db
       end
     end
 
-    @mainIndex = Index.new 'Welcome!'
+    @mainIndex = Index.new @@BLOG_TITLE
+    headingSection = TextSection.new @@BLOG_TAGLINE
+    headingSection << 'Hi, welcome to my blog.'
+    headingSection << 'My name is Matthieu Bauny and I am a :fr: software engineer.'
+    headingSection << "\n"
+    headingSection << 'I blog a little. My latest posts can be found bellow.'
+    @mainIndex << headingSection
     @mainIndex << latestSection if !latestSection.empty?
+
+    browseSection = TextSection.new 'Older posts'
+    browseSection << '- [Browse by year...](./posts)'
+    browseSection << '- [Browse by tag...](./tags)'
+    @mainIndex << browseSection
   end
 end

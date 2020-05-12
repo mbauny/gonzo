@@ -1,10 +1,19 @@
-# Welcome!
+# Matthieu Bauny's personal homepage
 
-## About
+## Meet the engineer
 
-Hello, this is dog.
+Hi, welcome to my blog.
+My name is Matthieu Bauny and I am a :fr: software engineer.
+
+
+I blog a little. My latest posts can be found bellow.
 
 ## Latest posts
 
 - [Jan 22] [Debugging Jest tests on Windows using VSCode](./posts/debugging-jest-tests-on-windows-using-vscode.md)
 - [Nov 05] [Blocking QObjects signals](./posts/blocking-qobjects-signals.md)
+
+## Older posts
+
+- [Browse by year...](./posts)
+- [Browse by tag...](./tags)
