@@ -3,14 +3,15 @@ title: 'Blocking QObjects signals'
 date: 2019-11-05
 tags: [C++, Qt]
 ---
+# Blocking QObjects signals
 
-# Motivation
+## Motivation
 
 Blocking a QObject's signals is a thing that you seldom need to do but that will sometimes be your only valid choice. As trivial as it seems, this is something that my formers colleagues and I have, for a long time, done incorrectly. I hope this post will help you learn from our past mistakes!
 
-# How to do it
+## How to do it
 
-## The bad way
+### The bad way
 
 What naturally comes to mind first is to do something like this:
 
@@ -58,7 +59,7 @@ myObject.blockSignals(false);
 
 Once _myFunction_ returns, we continue to work with _myObject_, assuming that its signals are still blocked whereas the function has unblocked them behind our back! 😱
 
-## The good way
+### The good way
 
 Qt has one of the best [documentation](https://doc.qt.io/qt-5/reference-overview.html#) around; let's see what it has to say about [_QObject::blockSignals(bool block)_](https://doc.qt.io/qt-5/qobject.html#blockSignals) (emphasis mine):
 
@@ -109,7 +110,7 @@ myFunction(&myObject);
 // ...
 ```
 
-# Take away
+## Take away
 
 1. Avoid blocking signals manually and use _QSignalBlocker_;
 2. Consistently refer to Qt's documentation;

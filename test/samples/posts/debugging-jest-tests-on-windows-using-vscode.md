@@ -3,8 +3,9 @@ title: 'Debugging Jest tests on Windows using VSCode'
 date: 2020-01-22
 tags: [JavaScript, Jest, VSCode]
 ---
+# Debugging Jest tests on Windows using VSCode
 
-# Motivation
+## Motivation
 
 Here is a quick post about an issue I ran into while working with a buddy of mine on a project using [Jest](https://jestjs.io/).
 
@@ -46,9 +47,9 @@ Waiting for the debugger to disconnect...
 
 What's up with all this regexp stuff?
 
-# How to do it
+## How to do it
 
-## The problem
+### The problem
 
 By default, and as the official documentation points it out, Jest interprets its input as a `regexForTestFiles` [regular expression](https://jestjs.io/docs/en/cli.html#jest-regexfortestfiles) (emphasis mine):
 
@@ -62,7 +63,7 @@ What this really means is that **you cannot use the same input on Windows and on
 
 :warning: On Windows, VSCode resolves `${relativeFile}` as something like _sources\\...\\\*.js_, which is no good for Jest.
 
-## The solution
+### The solution
 
 I am sure they are means of transforming the Windows input somehow but we are only passing a single full file path, so I see no point in using this regexp mechanism. It turns out Jest has [another way of receiving paths](https://jestjs.io/docs/en/cli#--runtestsbypath) that does not involve any regexp shenanigans (again, emphasis mine):
 
@@ -91,7 +92,7 @@ This is exactly what we needed: here is the updated configuration that works on 
 }
 ```
 
-# Take away
+## Take away
 
 -   Beware what Jest mode you are using
 -   When in doubt, refer to the documentation of the tool you are using
