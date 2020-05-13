@@ -26,7 +26,7 @@ class YearSection < PostSection
   end
 
   def << post
-    @entries << (PostsPagePostEntry.new post)
+    @entries << (PostEntry.new( post, '%b %d, %Y' ) )
   end
 end
 
@@ -36,7 +36,7 @@ class TagSection < PostSection
   end
 
   def << post
-    @entries << (TagsPagePostEntry.new post)
+    @entries << (PostEntry.new( post, '%b %d') )
   end
 end
 
@@ -52,6 +52,6 @@ class LatestSection < PostSection
   end
 
   def << post
-    @entries << (MainPagePostEntry.new post)
+    @entries << (PostEntry.new( post, '%b %d, %Y', '../posts' ) )
   end
 end

@@ -6,7 +6,7 @@ class TestPostEntry < Test::Unit::TestCase
   @@POST = Post.new './test/samples/posts/blocking-qobjects-signals.md'
 
   def test_main_page
-    entry = MainPagePostEntry.new @@POST
+    entry = PostEntry.new(@@POST, '%b %d, %Y', './posts')
 
     assert_equal( @@POST, entry.post )
     assert_equal( './posts/' + @@POST.file_name, entry.url )
@@ -16,7 +16,7 @@ class TestPostEntry < Test::Unit::TestCase
   end
 
   def test_posts_page
-    entry = PostsPagePostEntry.new @@POST
+    entry = PostEntry.new(@@POST, '%b %d')
 
     assert_equal( @@POST, entry.post )
     assert_equal( './' + @@POST.file_name, entry.url )
@@ -26,7 +26,7 @@ class TestPostEntry < Test::Unit::TestCase
   end
 
   def test_tags_page
-    entry = TagsPagePostEntry.new @@POST
+    entry = PostEntry.new(@@POST, '%b %d, %Y', '../posts')
 
     assert_equal( @@POST, entry.post )
     assert_equal( '../posts/' + @@POST.file_name, entry.url )
