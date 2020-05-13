@@ -53,7 +53,7 @@ class Db
     @mainIndex << latestSection if !latestSection.empty?
 
     browseSection = TextSection.new 'Older posts'
-    browseSection << '- [Browse by year...](./posts)'
+    browseSection << '- [Browse by date...](./posts)'
     browseSection << '- [Browse by tag...](./tags)'
     @mainIndex << browseSection
   end

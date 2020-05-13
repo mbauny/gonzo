@@ -15,5 +15,5 @@ I blog a little. My latest posts can be found bellow.
 
 ## Older posts
 
-- [Browse by year...](./posts)
+- [Browse by date...](./posts)
 - [Browse by tag...](./tags)
