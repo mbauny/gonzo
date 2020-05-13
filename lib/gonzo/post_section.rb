@@ -1,67 +1,42 @@
 require 'gonzo/section'
+require 'gonzo/post_entry'
 
 class PostSection < Section
-  attr_reader :posts
-  
-  def initialize title, fmt = :short
-    @title = title
-    @fmt = fmt
-    @posts = []
-  end
+  attr_reader :entries
 
-  def << post
-    @posts << post
+  def initialize title
+    @title = title
+    @entries = []
   end
 
   def empty?
-    @posts.empty?
-  end
-
-  def url post
-    ''
+    @entries.empty?
   end
 
   def to_s
     lines = ["## #{@title}\n"]
-    lines << @posts.map { |post| entry post }
+    lines << @entries.map { |entry| entry.to_s }
     lines.join "\n"
-  end
-
-  def entry post
-    fmt_str =  ''
-    case @fmt
-    when :long
-      fmt_str = "%b %d, %Y"
-    else
-      fmt_str = "%b %d"
-    end
-
-    url = url post
-    if url.empty?
-      "- [#{post.date.strftime fmt_str}] #{post.title}"
-    else
-      "- [#{post.date.strftime fmt_str}] [#{post.title}](#{url})"
-    end
   end
 end
 
 class YearSection < PostSection
   def initialize title
-    super title, :short
+    super title
   end
 
-  def url post
-    post.file_name
+  def << post
+    @entries << (PostsPagePostEntry.new post)
   end
 end
 
 class TagSection < PostSection
   def initialize title
-    super title, :long
+    super title
   end
 
-  def url post
-    '../posts/' + post.file_name
+  def << post
+    @entries << (TagsPagePostEntry.new post)
   end
 end
 
@@ -73,10 +48,10 @@ class LatestSection < PostSection
   end
 
   def full?
-    @posts.length >= @@MAX_SIZE
+    @entries.length >= @@MAX_SIZE
   end
 
-  def url post
-    './posts/' + post.file_name
+  def << post
+    @entries << (MainPagePostEntry.new post)
   end
 end
