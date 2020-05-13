@@ -1,6 +1,6 @@
-require "test/unit"
-require_relative '../lib/gonzo/post'
-require_relative '../lib/gonzo/post_entry'
+require_relative "test_helpers"
+require 'gonzo/post'
+require 'gonzo/post_entry'
 
 class TestPostEntry < Test::Unit::TestCase
   @@POST = Post.new './test/samples/posts/blocking-qobjects-signals.md'

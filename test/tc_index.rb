@@ -1,7 +1,7 @@
-require "test/unit"
-require_relative '../lib/gonzo/post'
-require_relative '../lib/gonzo/section'
-require_relative '../lib/gonzo/index'
+require_relative "test_helpers"
+require 'gonzo/post'
+require 'gonzo/post_section'
+require 'gonzo/index'
 
 class TestIndex < Test::Unit::TestCase
   @@POST1 = Post.new './test/samples/posts/blocking-qobjects-signals.md'
@@ -13,9 +13,9 @@ class TestIndex < Test::Unit::TestCase
   end
 
   def test_to_s_short
-    section1 = Section.new 'Section 1'
+    section1 = YearSection.new '2020'
     section1 << @@POST1 << @@POST2
-    section2 = Section.new 'Section 2'
+    section2 = YearSection.new '2019'
     section2 << @@POST1 << @@POST2
 
     index = Index.new 'Index'
@@ -30,9 +30,9 @@ class TestIndex < Test::Unit::TestCase
   end
 
   def test_to_s_long
-    section1 = Section.new 'Section 1', :long
+    section1 = TagSection.new 'C++'
     section1 << @@POST1 << @@POST2
-    section2 = Section.new 'Section 2', :long
+    section2 = TagSection.new 'JavaScript'
     section2 << @@POST1 << @@POST2
 
     index = Index.new 'Index'
