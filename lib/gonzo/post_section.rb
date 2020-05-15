@@ -26,7 +26,7 @@ class YearSection < PostSection
   end
 
   def << post
-    @entries << (PostEntry.new( post, '%b %d, %Y' ) )
+    @entries << (PostEntry.new( post, '%b %d' ) )
   end
 end
 
@@ -36,7 +36,7 @@ class TagSection < PostSection
   end
 
   def << post
-    @entries << (PostEntry.new( post, '%b %d') )
+    @entries << (PostEntry.new( post, '%b %d, %Y', '../posts') )
   end
 end
 
@@ -52,6 +52,6 @@ class LatestSection < PostSection
   end
 
   def << post
-    @entries << (PostEntry.new( post, '%b %d, %Y', '../posts' ) )
+    @entries << (PostEntry.new( post, '%b %d, %Y', './posts' ) )
   end
 end
