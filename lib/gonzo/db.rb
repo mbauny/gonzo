@@ -11,6 +11,10 @@ class Db
   attr_reader :postsIndex
   attr_reader :tagsIndex
 
+  def isReadMeFile file_path
+    file_path.end_with? 'README.md'
+  end
+
   def initialize src_dir
     @src_dir = src_dir
 
@@ -18,9 +22,8 @@ class Db
     tagsSections = Hash.new { |h, tag| h[tag] = TagSection.new tag }
 
     # Looking for post files...
-    # TODO: Clean this loop
     Dir.glob("#{@src_dir}/posts/*.md").each do |file_path|
-      next if file_path.end_with? 'README.md'
+      next if isReadMeFile file_path
 
       post = Post.new file_path
       yearSections[post.year] << post

@@ -10,8 +10,8 @@ I blog a little. My latest posts can be found bellow.
 
 ## Latest posts
 
-- [Jan 22, 2020] [Debugging Jest tests on Windows using VSCode](./posts/debugging-jest-tests-on-windows-using-vscode.md)
-- [Nov 05, 2019] [Blocking QObjects signals](./posts/blocking-qobjects-signals.md)
+- [Jan 22, 2020] [Debugging Jest tests on Windows using VSCode](./posts/debugging-jest-tests-on-windows-using-vscode.md#debugging-jest-tests-on-windows-using-vscode)
+- [Nov 05, 2019] [Blocking QObjects signals](./posts/blocking-qobjects-signals.md#blocking-qobjects-signals)
 
 ## Older posts
 

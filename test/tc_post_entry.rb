@@ -9,7 +9,7 @@ class TestPostEntry < Test::Unit::TestCase
     entry = PostEntry.new(@@POST, '%b %d, %Y', './posts')
 
     assert_equal( @@POST, entry.post )
-    assert_equal( './posts/' + @@POST.file_name, entry.url )
+    assert_equal( './posts/' + @@POST.file_name + '#' + @@POST.title_anchor, entry.url )
 
     expected = "- [#{@@POST.date.strftime '%b %d, %Y'}] [#{@@POST.title}](#{entry.url})"
     assert_equal( expected, entry.to_s )
@@ -19,7 +19,7 @@ class TestPostEntry < Test::Unit::TestCase
     entry = PostEntry.new(@@POST, '%b %d')
 
     assert_equal( @@POST, entry.post )
-    assert_equal( './' + @@POST.file_name, entry.url )
+    assert_equal( './' + @@POST.file_name + '#' + @@POST.title_anchor, entry.url )
 
     expected = "- [#{@@POST.date.strftime '%b %d'}] [#{@@POST.title}](#{entry.url})"
     assert_equal( expected, entry.to_s )
@@ -29,7 +29,7 @@ class TestPostEntry < Test::Unit::TestCase
     entry = PostEntry.new(@@POST, '%b %d, %Y', '../posts')
 
     assert_equal( @@POST, entry.post )
-    assert_equal( '../posts/' + @@POST.file_name, entry.url )
+    assert_equal( '../posts/' + @@POST.file_name + '#' + @@POST.title_anchor, entry.url )
 
     expected = "- [#{@@POST.date.strftime '%b %d, %Y'}] [#{@@POST.title}](#{entry.url})"
     assert_equal( expected, entry.to_s )
