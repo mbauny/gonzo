@@ -2,8 +2,11 @@ require 'gonzo/db'
 require 'github/markup'
 
 class Html
-  @@TITLE_MARKER = '#{TITLE}'
-  @@CONTENT_MARKER = '#{CONTENT}'
+  @@BLOG_TITLE = 'Meet the engineer'
+  @@BLOG_AUTHOR = 'Matthieu Bauny'
+  @@PAGE_TITLE_MARKER = '#{PAGE_TITLE}'
+  @@BLOG_TITLE_MARKER = '#{BLOG_TITLE}'
+  @@PAGE_CONTENT_MARKER = '#{CONTENT}'
 
   def initialize template_file_path, css_file_path
     @template = File.read template_file_path
@@ -34,8 +37,9 @@ class Html
     markdown = index.to_s
     html_content = GitHub::Markup.render_s( GitHub::Markups::MARKUP_MARKDOWN, markdown ).strip!
     html_page = @template.dup
-    html_page.sub! @@TITLE_MARKER, index.title
-    html_page.sub! @@CONTENT_MARKER, html_content
+    html_page.sub! @@BLOG_TITLE_MARKER, @@BLOG_TITLE
+    html_page.sub! @@PAGE_TITLE_MARKER, index.title
+    html_page.sub! @@PAGE_CONTENT_MARKER, html_content
     html_path = File.join dir, 'index.html'
     File.write html_path, html_page
   end

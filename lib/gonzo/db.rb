@@ -4,7 +4,7 @@ require 'gonzo/post_section'
 require 'gonzo/text_section'
 
 class Db
-  @@BLOG_TITLE = "Matthieu Bauny's personal homepage"
+  @@BLOG_TITLE = "Meet the engineer | Matthieu Bauny's personal homepage"
   @@BLOG_TAGLINE = 'Meet the engineer'
 
   attr_reader :src_dir
@@ -50,7 +50,7 @@ class Db
     @mainIndex = Index.new @@BLOG_TITLE
     headingSection = TextSection.new @@BLOG_TAGLINE
     headingSection << 'Hi, welcome to my blog.'
-    headingSection << 'My name is Matthieu Bauny and I am a :fr: software engineer.'
+    headingSection << 'My name is | Matthieu Bauny and I am a :fr: software engineer.'
     headingSection << "\n"
     headingSection << 'I blog a little. My latest posts can be found bellow.'
     @mainIndex << headingSection
