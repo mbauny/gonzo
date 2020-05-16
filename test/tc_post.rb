@@ -10,10 +10,6 @@ class TestPost < Test::Unit::TestCase
     assert_equal( 2019, @@POST.year )
   end
 
-  def test_anchor
-    assert_equal( 'blocking-qobjects-signals', @@POST.title_anchor )
-  end
-
   def test_to_s
     title = @@POST.title
     shortDate = @@POST.date.strftime "%b %d"

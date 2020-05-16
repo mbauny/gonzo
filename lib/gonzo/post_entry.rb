@@ -5,7 +5,7 @@ class PostEntry
   def initialize post, fmt, base_url = '.'
     @post = post
     @fmt = fmt
-    @url = (File.join base_url, post.file_name) + "##{@post.title_anchor}"
+    @url = (File.join base_url, post.file_name)
   end
 
   def to_s
