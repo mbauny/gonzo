@@ -14,7 +14,7 @@ class Post
     @title_anchor = @title.downcase.gsub! ' ', '-'
     @date = yaml['date']
     @tags = yaml['tags']
-    @file_name = File.basename file_path
+    @file_name = File.basename file_path, '.md'
   end
 
   def year
