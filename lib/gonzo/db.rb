@@ -7,6 +7,7 @@ class Db
   @@BLOG_TITLE = "Matthieu Bauny's personal homepage"
   @@BLOG_TAGLINE = 'Meet the engineer'
 
+  attr_reader :src_dir
   attr_reader :mainIndex
   attr_reader :postsIndex
   attr_reader :tagsIndex

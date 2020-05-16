@@ -1,21 +1,14 @@
 #!/usr/bin/env ruby
 $LOAD_PATH << './lib'
-
 require 'gonzo/db'
 require 'gonzo/index'
+require 'gonzo/html'
 
 class Gonzo
   def run dir
     db = Db.new dir
-    writeIndexFile((File.join dir, ''), db.mainIndex.to_s)
-    writeIndexFile((File.join dir, 'posts'), db.postsIndex.to_s)
-    writeIndexFile((File.join dir, 'tags'), db.tagsIndex.to_s)
-  end
-
-  def writeIndexFile dir, text
-    Dir.mkdir dir if !File.exists? dir
-    file = File.join dir, 'README.md'
-    File.write file, text
+    html_factory = Html.new './assets/template.html', './assets/style.css'
+    html_factory.write db
   end
 end
 

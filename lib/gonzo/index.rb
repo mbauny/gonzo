@@ -1,5 +1,6 @@
 class Index
   attr_reader :sections
+  attr_reader :title
 
   def initialize title
     @title = title
