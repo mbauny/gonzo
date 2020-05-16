@@ -3,5 +3,6 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
     "prettier.endOfLine": "lf",
-    "files.insertFinalNewline": true
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true
 }
