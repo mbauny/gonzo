@@ -16,7 +16,7 @@ class Post
     @date = yaml['date']
     @tags = yaml['tags']
     @file_path = file_path
-    @file_name = File.basename file_path, '.md'
+    @file_name = (File.basename file_path).sub '.md', '.html'
   end
 
   def year

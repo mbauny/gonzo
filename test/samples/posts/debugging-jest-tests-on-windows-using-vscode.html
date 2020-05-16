@@ -1,0 +1,89 @@
+<html>
+<head>
+<title> Debugging Jest tests on Windows using VSCode | Meet the engineer</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link media="all" rel="stylesheet" href="./style.css" />
+</head>
+<body>
+<div id='content'>
+<hr />
+<h2>title: 'Debugging Jest tests on Windows using VSCode'
+date: 2020-01-22
+tags: [JavaScript, Jest, VSCode]</h2>
+<h1>Debugging Jest tests on Windows using VSCode</h1>
+<h2>Motivation</h2>
+<p>Here is a quick post about an issue I ran into while working with a buddy of mine on a project using <a href="https://jestjs.io/">Jest</a>.</p>
+<p>We have a Visual Studio Code <a href="https://code.visualstudio.com/Docs/editor/debugging#_launch-configurations">launch configuration</a> that makes Jest run the current file, allowing us to step into our tests' code (<a href="https://duckduckgo.com/?q=%22vscode%22+debug+jest+test&amp;norw=1&amp;t=ffab&amp;atb=v167-1&amp;ia=images">very common stuff</a>). It was inspired from examples you can find all around the Internet and used to look like this:</p>
+<pre lang="json"><code>{
+	&quot;version&quot;: &quot;0.2.0&quot;,
+	&quot;configurations&quot;: [
+		{
+			&quot;type&quot;: &quot;node&quot;,
+			&quot;request&quot;: &quot;launch&quot;,
+			&quot;name&quot;: &quot;Debug current Jest test&quot;,
+			&quot;program&quot;: &quot;${workspaceFolder}/node_modules/jest/bin/jest&quot;,
+			&quot;args&quot;: [&quot;${relativeFile}&quot;] // The current file
+		}
+	]
+}
+</code></pre>
+<p>Unfortunately, <strong>it was not portable</strong> :scream:</p>
+<p>:heavy_check_mark: On <strong>MacOS</strong>, everything worked fine: hit <!-- raw HTML omitted -->F5<!-- raw HTML omitted --> and the current test would run, stopping at each breakpoint.</p>
+<p>:x: On <strong>Windows</strong>, we could not get a single test running and kept getting the following output:</p>
+<pre lang="Shell"><code>Debugger attached.
+No tests found, exiting with code 1
+Run with `--passWithNoTests` to exit with code 0
+In dopeProject
+171 files checked.
+testMatch: **/__tests__/**/*.[jt]s?(x), **/?(*.)+(spec|test).[tj]s?(x) - 42 matches
+testPathIgnorePatterns: \node_modules\ - 171 matches
+testRegex:  - 0 matches
+Pattern: sources\tests\dopeTests.test.js - 0 matches
+Waiting for the debugger to disconnect...
+</code></pre>
+<p>What's up with all this regexp stuff?</p>
+<h2>How to do it</h2>
+<h3>The problem</h3>
+<p>By default, and as the official documentation points it out, Jest interprets its input as a <code>regexForTestFiles</code> <a href="https://jestjs.io/docs/en/cli.html#jest-regexfortestfiles">regular expression</a> (emphasis mine):</p>
+<blockquote>
+<p>jest &lt;regexForTestFiles&gt;</p>
+<p>When you run jest with an argument, that argument is treated as a regular expression to match against files in your project. [...]</p>
+<p><strong>On Windows, you will need to use / as a path separator or escape \ as \</strong>.</p>
+</blockquote>
+<p>What this really means is that <strong>you cannot use the same input on Windows and on MacOS</strong>. :unamused:</p>
+<p>:warning: On Windows, VSCode resolves <code>${relativeFile}</code> as something like <em>sources\...\*.js</em>, which is no good for Jest.</p>
+<h3>The solution</h3>
+<p>I am sure they are means of transforming the Windows input somehow but we are only passing a single full file path, so I see no point in using this regexp mechanism. It turns out Jest has <a href="https://jestjs.io/docs/en/cli#--runtestsbypath">another way of receiving paths</a> that does not involve any regexp shenanigans (again, emphasis mine):</p>
+<blockquote>
+<p>--runTestsByPath</p>
+<p><strong>Run only the tests that were specified with their exact paths.</strong>
+Note: The default regex matching works fine on small runs, but becomes slow if provided with multiple patterns and/or against a lot of tests. This option replaces the regex matching logic and by that optimizes the time it takes Jest to filter specific test files</p>
+</blockquote>
+<p>This is exactly what we needed: here is the updated configuration that works on <strong>both plaforms</strong>:</p>
+<pre lang="json"><code>{
+	&quot;version&quot;: &quot;0.2.0&quot;,
+	&quot;configurations&quot;: [
+		{
+			&quot;type&quot;: &quot;node&quot;,
+			&quot;request&quot;: &quot;launch&quot;,
+			&quot;name&quot;: &quot;Debug current Jest test&quot;,
+			&quot;program&quot;: &quot;${workspaceFolder}/node_modules/jest/bin/jest&quot;,
+			&quot;args&quot;: [
+				&quot;--runTestsByPath&quot;, // &lt;--- HERE!
+				&quot;${relativeFile}&quot;
+			]
+		}
+	]
+}
+</code></pre>
+<h2>Take away</h2>
+<ul>
+<li>Beware what Jest mode you are using</li>
+<li>When in doubt, refer to the documentation of the tool you are using</li>
+<li>Pay attention to log messages</li>
+<li>Expect multi-plaform friction</li>
+</ul>
+</div>
+</body>
+</html>

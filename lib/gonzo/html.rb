@@ -22,6 +22,12 @@ class Html
     write_index posts_dir, db.postsIndex
     write_index tags_dir, db.tagsIndex
 
+    db.postsIndex.sections.each do |section|
+      section.entries.each do |entry|
+        write_post posts_dir, entry.post
+      end
+    end
+
     write_css root_dir
     write_css posts_dir
     write_css tags_dir
@@ -41,6 +47,17 @@ class Html
     html_page.sub! @@PAGE_TITLE_MARKER, index.title
     html_page.sub! @@PAGE_CONTENT_MARKER, html_content
     html_path = File.join dir, 'index.html'
+    File.write html_path, html_page
+  end
+
+  def write_post dir, post
+    markdown = File.read post.file_path
+    html_content = GitHub::Markup.render_s( GitHub::Markups::MARKUP_MARKDOWN, markdown ).strip!
+    html_page = @template.dup
+    html_page.sub! @@BLOG_TITLE_MARKER, @@BLOG_TITLE
+    html_page.sub! @@PAGE_TITLE_MARKER, post.title
+    html_page.sub! @@PAGE_CONTENT_MARKER, html_content
+    html_path = File.join dir, post.file_name
     File.write html_path, html_page
   end
 end
