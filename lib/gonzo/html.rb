@@ -52,6 +52,8 @@ class Html
 
   def write_post dir, post
     markdown = File.read post.file_path
+    # Remove YAML header.
+    markdown.sub!(/\A---(.|\n)*?---/, '')
     html_content = GitHub::Markup.render_s( GitHub::Markups::MARKUP_MARKDOWN, markdown ).strip!
     html_page = @template.dup
     html_page.sub! @@BLOG_TITLE_MARKER, @@BLOG_TITLE
