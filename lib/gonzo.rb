@@ -2,13 +2,13 @@
 $LOAD_PATH << './lib'
 require 'gonzo/db'
 require 'gonzo/index'
-require 'gonzo/html'
+require 'gonzo/markdown'
 
 class Gonzo
   def run dir
     db = Db.new dir
-    html_factory = Html.new './assets/template.html', './assets/style.css'
-    html_factory.write db
+    markdown_factory = Markdown.new
+    markdown_factory.write db
   end
 end
 
