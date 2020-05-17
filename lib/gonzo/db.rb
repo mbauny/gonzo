@@ -46,9 +46,7 @@ class Db
 
     @mainIndex = Index.new "Matthieu Bauny's personal homepage"
     headingSection = TextSection.new 'Meet the engineer'
-    headingSection << 'Hi, welcome to my homepage.'
-    headingSection << "\n"
-    headingSection << 'I blog a little. My latest posts can be found bellow.'
+    headingSection << 'Hi, welcome to my homepage. I blog a little. My latest posts can be found bellow.'
     @mainIndex << headingSection
     @mainIndex << latestSection if !latestSection.empty?
 
