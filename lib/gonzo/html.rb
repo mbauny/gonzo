@@ -40,6 +40,7 @@ class Html
   end
 
   def write_index dir, index
+    Dir.mkdir dir if !File.exists? dir
     markdown = index.to_s
     html_content = GitHub::Markup.render_s( GitHub::Markups::MARKUP_MARKDOWN, markdown ).strip!
     html_page = @template.dup
