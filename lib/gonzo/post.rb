@@ -10,11 +10,13 @@ class Post
 
   def initialize file_path
     yaml = YAML.load_file file_path
-    @title = yaml['title']
     @date = yaml['date']
     @tags = yaml['tags']
     @file_path = file_path
     @file_name = File.basename file_path
+
+    content = File.read file_path
+    content.match(/# (.*)\n/) {|match| @title = match[1] }
   end
 
   def year
