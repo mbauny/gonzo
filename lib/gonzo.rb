@@ -13,8 +13,6 @@ class Gonzo
 end
 
 dir = ARGV.empty? ? Dir.pwd : ARGV[0]
-# TODO: use dir
-dir = '/Users/mbauny/sources/gonzo/test/samples'
 
 if File.directory? dir
   app = Gonzo.new
