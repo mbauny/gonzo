@@ -25,7 +25,7 @@ class TestPostSection < Test::Unit::TestCase
 
   def test_latest_section
     section = LatestSection.new
-    assert_equal( "## Latest posts\n\n", section.to_s )
+    assert_equal( "## :new: Latest posts\n\n", section.to_s )
 
     assert_equal( true, section.empty?)
     section << @@POST1

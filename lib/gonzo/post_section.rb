@@ -42,7 +42,7 @@ end
 
 class LatestSection < PostSection
   @@MAX_SIZE = 5
-  @@TITLE = 'Latest posts'
+  @@TITLE = ':new: Latest posts'
   def initialize
     super @@TITLE
   end
