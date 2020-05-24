@@ -1,5 +1,4 @@
 require 'date'
-require 'yaml'
 
 class Post
   attr_reader :title
@@ -9,14 +8,15 @@ class Post
   attr_reader :file_path
 
   def initialize file_path
-    yaml = YAML.load_file file_path
-    @date = yaml['date']
-    @tags = yaml['tags']
+    @date = Date.today
+    @tags = []
     @file_path = file_path
     @file_name = File.basename file_path
 
     content = File.read file_path
-    content.match(/# (.*)\n/) {|match| @title = match[1] }
+    content.match(/^# (.*)\n/) {|match| @title = match[1] }
+    content.match(/\[\/\/\]: # \(date (.*)\)/)  { |match| @date = Date.parse match[1] }
+    content.match(/\[\/\/\]: # \(tags (.*)\)/)  { |match| @tags = match[1].split(',').map(&:strip) }
   end
 
   def year
