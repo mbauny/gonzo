@@ -44,15 +44,16 @@ class Db
       end
     end
 
-    @mainIndex = Index.new "Matthieu Bauny's homepage"
-    headingSection = TextSection.new ':wave: Meet the engineer'
-    headingSection << 'Hi, welcome to my homepage. I blog a little. My latest posts can be found bellow.'
-    @mainIndex << headingSection
-    @mainIndex << latestSection if !latestSection.empty?
+    headingSection = TextSection.new ":wave: Matthieu Bauny's page"
+    headingSection << "Hi, welcome to my homepage.\n"
+    headingSection << "I blog a little and my latest posts can be found bellow. You can also read a little more about me [here](./pages/about.md \"About\").\n"
+    headingSection << 'Cheers.'
 
     browseSection = TextSection.new ':date: Older posts'
-    browseSection << '- [Browse by date](./posts)'
-    browseSection << '- [Browse by tag](./tags)'
+    browseSection << '- [Browse by date](./posts "Posts")' << '- [Browse by topic](./tags "Tags")'
+
+    @mainIndex = Index.new 'Meet the engineer'
+    @mainIndex << headingSection << latestSection
     @mainIndex << browseSection
   end
 end
