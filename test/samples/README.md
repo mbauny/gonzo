@@ -15,5 +15,5 @@ Cheers :metal:
 
 ## :date: Older posts
 
-- [Browse by date](./posts "Posts")
-- [Browse by topic](./tags "Tags")
+- [Browse by date](./posts#posts "Posts")
+- [Browse by topic](./tags#tags "Tags")

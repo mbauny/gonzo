@@ -50,7 +50,7 @@ class Db
     headingSection << 'Cheers :metal:'
 
     browseSection = TextSection.new ':date: Older posts'
-    browseSection << '- [Browse by date](./posts "Posts")' << '- [Browse by topic](./tags "Tags")'
+    browseSection << '- [Browse by date](./posts#posts "Posts")' << '- [Browse by topic](./tags#tags "Tags")'
 
     @mainIndex = Index.new 'Meet the engineer'
     @mainIndex << headingSection << latestSection
