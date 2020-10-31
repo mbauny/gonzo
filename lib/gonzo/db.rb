@@ -32,7 +32,9 @@ class Db
     yearSections.each { |k, section| @postsIndex << section }
 
     @tagsIndex = Index.new 'Tags'
-    tagsSections.each { |k, section| @tagsIndex << section }
+    tagsSections
+    .sort_by { |k, section| section.title.downcase }
+    .each { |k, section| @tagsIndex << section }
 
     latestSection = LatestSection.new
     for section in postsIndex.sections
