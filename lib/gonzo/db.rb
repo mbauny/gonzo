@@ -29,7 +29,9 @@ class Db
     end
 
     @postsIndex = Index.new 'Posts'
-    yearSections.each { |k, section| @postsIndex << section }
+    yearSections
+    .sort_by { |k, section| -section.title }
+    .each { |k, section| @postsIndex << section }
 
     @tagsIndex = Index.new 'Tags'
     tagsSections
