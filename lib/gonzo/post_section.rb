@@ -5,7 +5,7 @@ class PostSection < Section
   attr_reader :entries
 
   def initialize title
-    @title = title
+    super title
     @entries = []
   end
 

@@ -1,8 +1,6 @@
 require 'gonzo/section'
 
 class TextSection < Section
-  attr_accessor :content
-
   def initialize title
     super title
     @lines = ["## #{@title}\n"]
