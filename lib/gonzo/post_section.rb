@@ -15,7 +15,9 @@ class PostSection < Section
 
   def to_s
     lines = ["## #{@title}\n"]
-    lines << @entries.map { |entry| entry.to_s }
+    lines << @entries
+      .sort_by { |entry| entry.post.date }.reverse
+      .map { |entry| entry.to_s }
     lines.join "\n"
   end
 end
