@@ -1,0 +1,46 @@
+{
+    "plugins": ["@typescript-eslint"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "impliedStrict": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "ignorePatterns": ["dist/", "**/*.d.ts"],
+    "rules": {
+        "no-dupe-else-if": "error",
+        "default-case": "error",
+        "eqeqeq": "error",
+        "no-invalid-this": "error",
+        "no-magic-numbers": "error",
+        "no-param-reassign": "error",
+        "no-shadow": "error",
+        "no-use-before-define": "error",
+        "quotes": ["error", "single"],
+        "no-var": "error",
+        "prefer-const": "warn",
+        "prefer-template": "warn",
+        "comma-dangle": "off",
+        "semi": "off"
+    },
+    "@typescript-eslint/no-magic-numbers": [
+        "warn",
+        {
+            "ignore": [0, 1],
+            "ignoreEnums": true,
+            "ignoreNumericLiteralTypes": true,
+            "ignoreReadonlyClassProperties": true
+        }
+    ],
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/explicit-function-return-type": "warn",
+    "@typescript-eslint/no-empty-interface": "off",
+    "@typescript-eslint/ban-ts-comment": "off"
+}

@@ -1,8 +1,10 @@
 {
-    "editor.tabSize": 2,
-    "editor.insertSpaces": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.detectIndentation": false,
-    "prettier.endOfLine": "lf",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
     "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true
+    "files.trimTrailingWhitespace": true,
+    "prettier.endOfLine": "lf"
 }

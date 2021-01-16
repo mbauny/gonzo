@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "alwaysStrict": true,
+        "allowSyntheticDefaultImports": true,
+        "declaration": true,
+        "forceConsistentCasingInFileNames": true,
+        "isolatedModules": true,
+        "lib": ["ES2017"],
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "noEmit": false,
+        "noImplicitAny": true,
+        "outDir": "dist",
+        "sourceMap": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "target": "ES2017"
+    },
+    "include": ["src/**.ts"]
+}
