@@ -1,28 +1,25 @@
+import { DataBase } from './core/database'
 import * as yargs from 'yargs'
 
-const args = yargs
+const argv = yargs
     .scriptName('gonzo')
     .usage('Usage: $0 [options]')
     .version()
     .alias('v', 'version')
     .help()
     .alias('h', 'help')
-    .option('input', {
-        alias: 'i',
+    .option('blogDir', {
+        alias: 'b',
         description: '',
-        demandOption: true,
+        default: '/Users/mbauny/sources/gonzo/test/samples',
         type: 'string',
     })
-    .option('output', {
-        alias: 'o',
-        default: '<input>',
-        description: '',
-        type: 'string',
-    })
+
     .option('dry', {
         alias: 'd',
         description: '',
-    })
+    }).argv
 
-console.log(args.argv)
-console.log('hello, world!')
+const blogDir = argv.blogDir ?? process.cwd()
+
+console.log(DataBase.create(blogDir))
