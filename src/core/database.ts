@@ -48,8 +48,7 @@ export class DataBase {
 
         this.postsByYear.set(year, postsByYear)
 
-        const tags = post.tags ?? ['Uncategorized']
-        for (const tag of tags) {
+        for (const tag of post.tags) {
             const postsByTag = [...(this.postsByTag.get(tag) ?? []), post]
 
             this.postsByTag.set(tag, postsByTag)
