@@ -1,7 +1,9 @@
 import { readFileSync } from 'fs'
+import { basename } from 'path'
 
 export interface Post {
     readonly file: string
+    readonly fileName: string
     readonly title: string
     readonly anchor: string
     readonly tags: string[]
@@ -24,13 +26,14 @@ export function newPost(file: string): Post | undefined {
 
         return {
             file,
+            fileName: basename(file),
             title,
             anchor,
-            date: new Date(),
+            date: new Date('Nov 05, 2019'),
             tags: ['Uncategorized'],
         }
     } catch (err) {
-        console.error(err)
+        // console.error(err)
         return undefined
     }
 }

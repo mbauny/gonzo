@@ -1,5 +1,6 @@
 import { DataBase } from './core/database'
 import * as yargs from 'yargs'
+import { write } from './core/writer'
 
 const argv = yargs
     .scriptName('gonzo')
@@ -21,5 +22,5 @@ const argv = yargs
     }).argv
 
 const blogDir = argv.blogDir ?? process.cwd()
-
-console.log(DataBase.create(blogDir))
+const db = DataBase.create(blogDir)
+if (db) write(db)
