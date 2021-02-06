@@ -3,7 +3,7 @@ import { Format, getDate, getEntry, getUrl } from '../../entry'
 
 describe('post entry format', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'
-    const expectedUrl = '../posts/blocking-qobjects-signals.md#blocking-qobjects-signals'
+    const expectedUrl = 'blocking-qobjects-signals.md#blocking-qobjects-signals'
     const expectedDate = 'Nov 05'
 
     describe('years index', () => {

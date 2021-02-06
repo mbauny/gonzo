@@ -17,6 +17,8 @@ export function getUrl(post: Post, format = Format.LatestIndex): string {
             root = 'posts'
             break
         case Format.YearIndex:
+            root = ''
+            break
         case Format.TagIndex:
             root = '../posts'
             break
