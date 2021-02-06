@@ -12,6 +12,8 @@ export function getFormattedUrl(post: Post, format = Format.LatestIndex): string
     let root = ''
 
     switch (format) {
+        default:
+            break
         case Format.LatestIndex:
             root = 'posts'
             break
@@ -33,6 +35,8 @@ export function getFormattedDate(date: Date, format = Format.LatestIndex): strin
     } = { year: 'numeric', month: 'short', day: '2-digit' }
 
     switch (format) {
+        default:
+            break
         case Format.YearIndex:
             delete options.year
             break

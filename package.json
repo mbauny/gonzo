@@ -9,6 +9,7 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc-watch --onSuccess 'node ./dist/main.js'",
+        "lint": "eslint .",
         "test": "jest"
     },
     "lint-staged": {
