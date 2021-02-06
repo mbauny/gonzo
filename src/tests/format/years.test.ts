@@ -1,5 +1,5 @@
 import { newPost } from '../../post'
-import { Format, getFormattedDate, getFormattedEntry, getFormattedUrl } from '../../writer'
+import { Format, getFormattedDate, getFormattedEntry, getFormattedUrl } from '../../format'
 
 describe('post entry format', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'

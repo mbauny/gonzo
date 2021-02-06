@@ -1,17 +1,17 @@
 import { newPost } from '../../post'
-import { Format, getFormattedDate, getFormattedEntry, getFormattedUrl } from '../../writer'
+import { Format, getFormattedDate, getFormattedEntry, getFormattedUrl } from '../../format'
 
 describe('post entry format', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'
-    const expectedUrl = '../posts/blocking-qobjects-signals.md#blocking-qobjects-signals'
+    const expectedUrl = 'posts/blocking-qobjects-signals.md#blocking-qobjects-signals'
     const expectedDate = 'Nov 05, 2019'
 
-    describe('tags index', () => {
+    describe('latest index', () => {
         test('url', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedUrl(post, Format.TagIndex)
+                const url = getFormattedUrl(post, Format.LatestIndex)
                 expect(url).toEqual(expectedUrl)
             }
         })
@@ -20,7 +20,7 @@ describe('post entry format', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedDate(post.date, Format.TagIndex)
+                const url = getFormattedDate(post.date, Format.LatestIndex)
                 expect(url).toEqual(expectedDate)
             }
         })
@@ -29,7 +29,7 @@ describe('post entry format', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedEntry(post, Format.TagIndex)
+                const url = getFormattedEntry(post, Format.LatestIndex)
                 const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
                 expect(url).toEqual(expected)
             }

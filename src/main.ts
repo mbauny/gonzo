@@ -1,6 +1,6 @@
-import { DataBase } from './core/database'
+import { DataBase } from './database'
+import { write } from './format'
 import * as yargs from 'yargs'
-import { write } from './core/writer'
 
 const argv = yargs
     .scriptName('gonzo')

@@ -1,5 +1,5 @@
-import { DataBase } from 'core/database'
-import { Post } from 'core/post'
+import { DataBase } from './database'
+import { Post } from './post'
 import { join } from 'path'
 
 export enum Format {
