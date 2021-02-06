@@ -1,5 +1,5 @@
 import { DataBase } from './database'
-import { write } from './format'
+import { writeYearsIndex } from './index'
 import * as yargs from 'yargs'
 
 const argv = yargs
@@ -23,4 +23,4 @@ const argv = yargs
 
 const blogDir = argv.blogDir ?? process.cwd()
 const db = DataBase.create(blogDir)
-if (db) write(db)
+if (db) writeYearsIndex(db)

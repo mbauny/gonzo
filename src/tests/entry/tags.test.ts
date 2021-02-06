@@ -1,5 +1,5 @@
 import { newPost } from '../../post'
-import { Format, getFormattedDate, getFormattedEntry, getFormattedUrl } from '../../format'
+import { Format, getDate, getEntry, getUrl } from '../../entry'
 
 describe('post entry format', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'
@@ -11,7 +11,7 @@ describe('post entry format', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedUrl(post, Format.TagIndex)
+                const url = getUrl(post, Format.TagIndex)
                 expect(url).toEqual(expectedUrl)
             }
         })
@@ -20,7 +20,7 @@ describe('post entry format', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedDate(post.date, Format.TagIndex)
+                const url = getDate(post.date, Format.TagIndex)
                 expect(url).toEqual(expectedDate)
             }
         })
@@ -29,7 +29,7 @@ describe('post entry format', () => {
             const post = newPost(path)
             expect(post).not.toEqual(undefined)
             if (post) {
-                const url = getFormattedEntry(post, Format.TagIndex)
+                const url = getEntry(post, Format.TagIndex)
                 const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
                 expect(url).toEqual(expected)
             }
