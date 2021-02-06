@@ -31,7 +31,7 @@ export class DataBase {
                 }
             }
         } catch (err) {
-            console.log(err)
+            // console.log(err)
         }
 
         return db
