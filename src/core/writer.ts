@@ -41,7 +41,7 @@ export function getFormattedDate(date: Date, format = Format.LatestIndex): strin
     return date.toLocaleDateString('en-US', options)
 }
 
-export function getEntry(post: Post, format = Format.LatestIndex): string {
+export function getFormattedEntry(post: Post, format = Format.LatestIndex): string {
     const date = getFormattedDate(post.date, format)
     const url = getFormattedUrl(post, format)
     return `- [${date}] [${post.title}](${url})`
@@ -62,7 +62,7 @@ export function write(db: DataBase): void {
         if (!posts) continue
 
         for (const post of posts) {
-            console.log(getEntry(post))
+            console.log(getFormattedEntry(post))
         }
     }
 }
