@@ -1,18 +1,16 @@
-import { DataBase } from '../database'
+import { newDataBase } from '../database'
 
 describe('database', () => {
     describe('construction', () => {
         test('empty path', () => {
-            const db = DataBase.create('')
+            const db = newDataBase('')
 
-            expect(db).not.toEqual(undefined)
-            expect(db?.postsByYear.size).toEqual(0)
-            expect(db?.postsByTag.size).toEqual(0)
+            expect(db).toEqual(undefined)
         })
 
         test('valid path', () => {
             const path = '/Users/mbauny/sources/gonzo/test/samples'
-            const db = DataBase.create(path)
+            const db = newDataBase(path)
 
             expect(db).not.toEqual(undefined)
             expect(db?.postsByYear.size).not.toEqual(0)

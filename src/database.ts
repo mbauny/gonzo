@@ -2,6 +2,14 @@ import { newPost, Post } from './post'
 import { readdirSync } from 'fs'
 import { basename, extname, join } from 'path'
 
+export interface DataBase {
+    readonly postsByYear: Map<number, Post[]>
+    readonly postsByTag: Map<string, Post[]>
+    readonly latestPosts: Post[]
+}
+
+const latestCount = 5
+
 function comparePosts(post1: Post, post2: Post): number {
     const date1 = post1.date
     const date2 = post2.date
@@ -20,48 +28,46 @@ function isPostFile(file: string): boolean {
     return false
 }
 
-export class DataBase {
-    readonly postsByYear: Map<number, Post[]>
-    readonly postsByTag: Map<string, Post[]>
+export function newDataBase(dir: string): DataBase | undefined {
+    const allPosts: Post[] = []
+    const postsByYear: Map<number, Post[]> = new Map()
+    const postsByTag: Map<string, Post[]> = new Map()
 
-    static create(dir: string): DataBase | undefined {
-        const db = new DataBase()
+    try {
+        const add = function (post: Post): void {
+            const year = post.date.getFullYear()
+            const postsForYear = [...(postsByYear.get(year) ?? []), post]
 
-        try {
-            const posts = join(dir, 'posts')
-            const files = readdirSync(posts)
+            postsByYear.set(year, postsForYear)
 
-            for (const file of files) {
-                if (isPostFile(file)) {
-                    const path = join(posts, file)
-                    const post = newPost(path)
+            for (const tag of post.tags) {
+                const postsForTag = [...(postsByTag.get(tag) ?? []), post]
+                postsForTag.sort(comparePosts)
 
-                    if (post) db.add(post)
-                }
+                postsByTag.set(tag, postsForTag)
             }
-        } catch (err) {
-            // console.log(err)
+
+            allPosts.push(post)
         }
 
-        return db
-    }
+        const posts = join(dir, 'posts')
+        const files = readdirSync(posts)
 
-    private constructor() {
-        this.postsByYear = new Map()
-        this.postsByTag = new Map()
-    }
+        for (const file of files) {
+            if (isPostFile(file)) {
+                const path = join(posts, file)
+                const post = newPost(path)
 
-    add(post: Post): void {
-        const year = post.date.getFullYear()
-        const postsByYear = [...(this.postsByYear.get(year) ?? []), post]
-
-        this.postsByYear.set(year, postsByYear)
-
-        for (const tag of post.tags) {
-            const postsByTag = [...(this.postsByTag.get(tag) ?? []), post]
-            postsByTag.sort(comparePosts)
-
-            this.postsByTag.set(tag, postsByTag)
+                if (post) add(post)
+            }
         }
+
+        return {
+            postsByYear,
+            postsByTag,
+            latestPosts: allPosts.sort(comparePosts).slice(0, latestCount),
+        }
+    } catch (err) {
+        return undefined
     }
 }
