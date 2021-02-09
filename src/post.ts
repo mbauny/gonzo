@@ -2,10 +2,8 @@ import { readFileSync } from 'fs'
 import { basename } from 'path'
 
 export interface Post {
-    readonly file: string
-    readonly fileName: string
     readonly title: string
-    readonly anchor: string
+    readonly url: string
     readonly tags: string[]
     readonly date: Date
 }
@@ -69,12 +67,12 @@ export function newPost(file: string): Post | undefined {
         const metaData = extractMetaData(utf8)
         if (!metaData) return undefined
 
+        const fileName = basename(file)
         const anchor = metaData.title.toLowerCase().replaceAll(' ', '-')
+        const url = `${fileName}#${anchor}`
 
         return {
-            file,
-            fileName: basename(file),
-            anchor,
+            url,
             ...metaData,
         }
     } catch (err) {

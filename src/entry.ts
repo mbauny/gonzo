@@ -24,8 +24,7 @@ export function getUrl(post: Post, format = Format.LatestIndex): string {
             break
     }
 
-    const url = join(root, post.fileName)
-    return `${url}#${post.anchor}`
+    return join(root, post.url)
 }
 
 export function getDate(date: Date, format = Format.LatestIndex): string {
