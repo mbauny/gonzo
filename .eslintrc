@@ -18,40 +18,42 @@
         "prettier/@typescript-eslint",
         "plugin:prettier/recommended"
     ],
-    "ignorePatterns": ["dist/", "**/*.d.ts"],
+    "ignorePatterns": ["dist/", "*.d.ts"],
     "rules": {
-        "@typescript-eslint/ban-ts-comment": "off",
-        "@typescript-eslint/explicit-function-return-type": "warn",
-        "@typescript-eslint/interface-name-prefix": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/no-magic-numbers": [
-            "warn",
-            {
-                "ignore": [-1, 0, 1],
-                "ignoreEnums": true,
-                "ignoreNumericLiteralTypes": true,
-                "ignoreReadonlyClassProperties": true
-            }
-        ],
-        "@typescript-eslint/no-shadow": "error",
-        "@typescript-eslint/prefer-optional-chain": "warn",
-        "@typescript-eslint/prefer-ts-expect-error": "warn",
         "comma-dangle": "off",
-        "default-case": "error",
+        "consistent-return": "error",
         "eqeqeq": "error",
-        "no-dupe-else-if": "error",
-        "no-duplicate-imports": "error",
-        "no-invalid-this": "error",
+        "no-invalid-this": "warn",
         "no-param-reassign": "error",
-        "no-shadow": "off",
-        "no-unused-expressions": "off",
-        "no-unused-vars": "off",
         "no-use-before-define": "error",
-        "no-var": "error",
-        "prefer-const": "warn",
-        "prefer-template": "warn",
-        "quotes": "off",
-        "semi": "off"
-    }
+        "prefer-template": "warn"
+    },
+    "overrides": [
+        {
+            "files": ["*.ts", "*.test.ts"],
+            "parserOptions": {
+                "project": ["tsconfig.json"]
+            },
+            "rules": {
+                "@typescript-eslint/no-magic-numbers": [
+                    "warn",
+                    {
+                        "ignore": [-1, 0, 1],
+                        "ignoreEnums": true,
+                        "ignoreNumericLiteralTypes": true,
+                        "ignoreReadonlyClassProperties": true
+                    }
+                ],
+                "@typescript-eslint/explicit-function-return-type": "warn",
+                "@typescript-eslint/no-shadow": "error",
+                "@typescript-eslint/no-unused-expressions": "error",
+                "@typescript-eslint/prefer-for-of": "error",
+                "@typescript-eslint/prefer-nullish-coalescing": "error",
+                "@typescript-eslint/prefer-optional-chain": "error",
+                "@typescript-eslint/prefer-readonly": "error",
+                "@typescript-eslint/prefer-ts-expect-error": "error",
+                "@typescript-eslint/switch-exhaustiveness-check": "error"
+            }
+        }
+    ]
 }
