@@ -16,12 +16,17 @@ interface MetaData {
     readonly date: Date
 }
 
-const regExpTitle = new RegExp('^# (?<title>.*)$', '')
-const regExpTags = new RegExp("^\\[\\/\\/\\]: # 'tags (?<tags>.*)'$", '')
+const regExpTitle = new RegExp('^# (?<title>.*)$')
+const regExpDate = new RegExp("^\\[\\/\\/\\]: # 'date (?<date>.*)'$")
+const regExpTags = new RegExp("^\\[\\/\\/\\]: # 'tags (?<tags>.*)'$")
+
+function isValid(date: Date): boolean {
+    return !isNaN(date.getTime())
+}
 
 function extractMetaData(fileContent: string): MetaData | undefined {
     let title: string | undefined
-    const date: Date | undefined = new Date('Nov 05, 2019')
+    let date: Date | undefined
     let tags: string[] | undefined
 
     const lines = fileContent.split(/\r?\n/)
@@ -29,6 +34,14 @@ function extractMetaData(fileContent: string): MetaData | undefined {
         if (!title) {
             const matches = regExpTitle.exec(line)
             if (matches) title = matches.groups?.title
+        }
+
+        if (!tags) {
+            const matches = regExpDate.exec(line)
+            if (matches) {
+                const maybeDate = new Date(matches.groups?.date ?? '')
+                if (isValid(maybeDate)) date = maybeDate
+            }
         }
 
         if (!tags) {
@@ -61,8 +74,8 @@ export function newPost(file: string): Post | undefined {
         return {
             file,
             fileName: basename(file),
-            ...metaData,
             anchor,
+            ...metaData,
         }
     } catch (err) {
         return undefined
