@@ -26,3 +26,4 @@ const db = newDataBase(blogDir)
 if (db) writeYearsIndex(db)
 if (db) writeTagsIndex(db)
 if (db) writeLatestIndex(db)
+db

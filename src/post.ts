@@ -10,30 +10,61 @@ export interface Post {
     readonly date: Date
 }
 
-const regExpTitle = new RegExp('^# (?<title>.*)$', 'm')
+interface MetaData {
+    readonly title: string
+    readonly tags: string[]
+    readonly date: Date
+}
+
+const regExpTitle = new RegExp('^# (?<title>.*)$', '')
+const regExpTags = new RegExp("^\\[\\/\\/\\]: # 'tags (?<tags>.*)'$", '')
+
+function extractMetaData(fileContent: string): MetaData | undefined {
+    let title: string | undefined
+    const date: Date | undefined = new Date('Nov 05, 2019')
+    let tags: string[] | undefined
+
+    const lines = fileContent.split(/\r?\n/)
+    for (const line of lines) {
+        if (!title) {
+            const matches = regExpTitle.exec(line)
+            if (matches) title = matches.groups?.title
+        }
+
+        if (!tags) {
+            const matches = regExpTags.exec(line)
+            if (matches) {
+                const tagChain = matches.groups?.tags
+                tags = tagChain?.split(',').map(tag => tag.trim())
+            }
+        }
+    }
+
+    if (!tags) tags = ['Uncategorized']
+    if (!title || !date) return undefined
+
+    return {
+        title,
+        date,
+        tags,
+    }
+}
 
 export function newPost(file: string): Post | undefined {
     try {
         const utf8 = readFileSync(file, 'utf-8')
+        const metaData = extractMetaData(utf8)
+        if (!metaData) return undefined
 
-        const matches = regExpTitle.exec(utf8)
-        if (!matches) return undefined
-
-        const title = matches.groups?.title
-        if (!title) return undefined
-
-        const anchor = title.toLowerCase().replaceAll(' ', '-')
+        const anchor = metaData.title.toLowerCase().replaceAll(' ', '-')
 
         return {
             file,
             fileName: basename(file),
-            title,
+            ...metaData,
             anchor,
-            date: new Date('Nov 05, 2019'),
-            tags: ['Uncategorized'],
         }
     } catch (err) {
-        // console.error(err)
         return undefined
     }
 }

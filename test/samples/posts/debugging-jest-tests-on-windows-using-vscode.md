@@ -1,5 +1,5 @@
-[//]: # (date 2020-01-22)
-[//]: # (tags JavaScript, Jest, VSCode)
+[//]: # 'date 2020-01-22'
+[//]: # 'tags JavaScript, Jest, VSCode'
 
 # Debugging Jest tests on Windows using VSCode
 
@@ -11,16 +11,16 @@ We have a Visual Studio Code [launch configuration](https://code.visualstudio.co
 
 ```json
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Debug current Jest test",
-			"program": "${workspaceFolder}/node_modules/jest/bin/jest",
-			"args": ["${relativeFile}"] // The current file
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug current Jest test",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "args": ["${relativeFile}"] // The current file
+        }
+    ]
 }
 ```
 
@@ -74,19 +74,19 @@ This is exactly what we needed: here is the updated configuration that works on 
 
 ```json
 {
-	"version": "0.2.0",
-	"configurations": [
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Debug current Jest test",
-			"program": "${workspaceFolder}/node_modules/jest/bin/jest",
-			"args": [
-				"--runTestsByPath", // <--- HERE!
-				"${relativeFile}"
-			]
-		}
-	]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Debug current Jest test",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "args": [
+                "--runTestsByPath", // <--- HERE!
+                "${relativeFile}"
+            ]
+        }
+    ]
 }
 ```
 
