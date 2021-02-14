@@ -1,12 +1,13 @@
-import { DataBase } from './database'
-import { Format, getEntry } from './entry'
+import { DataBase } from 'database'
+import { getEntry } from './entry'
+import { Format } from './format'
 
-export function writeYearsIndex(db: DataBase): void {
+export function getYearsCatalog(db: DataBase): string {
     const content = ['# Posts\n']
 
     const postsByYear = db.postsByYear
 
-    const years = [...postsByYear.keys()].sort()
+    const years = [...postsByYear.keys()].sort().reverse()
 
     for (const year of years) {
         const posts = postsByYear.get(year)
@@ -20,10 +21,10 @@ export function writeYearsIndex(db: DataBase): void {
         }
     }
 
-    console.log(content.join('\n'))
+    return content.join('\n')
 }
 
-export function writeTagsIndex(db: DataBase): void {
+export function getTagsCatalog(db: DataBase): string {
     const content = ['# Tags\n']
 
     const postsByTag = db.postsByTag
@@ -42,10 +43,10 @@ export function writeTagsIndex(db: DataBase): void {
         }
     }
 
-    console.log(content.join('\n'))
+    return content.join('\n')
 }
 
-export function writeLatestIndex(db: DataBase): void {
+export function getLatestCatalog(db: DataBase): string {
     const content = ['# Latest posts\n']
 
     const maxSize = 5
@@ -70,5 +71,5 @@ export function writeLatestIndex(db: DataBase): void {
         }
     }
 
-    console.log(content.join('\n'))
+    return content.join('\n')
 }

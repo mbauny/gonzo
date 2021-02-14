@@ -1,11 +1,6 @@
-import { Post } from './post'
+import { Post } from 'post'
 import { join } from 'path'
-
-export enum Format {
-    LatestIndex = 'LatestIndex',
-    YearIndex = 'YearIndex',
-    TagIndex = 'TagIndex',
-}
+import { Format } from './format'
 
 export function getUrl(post: Post, format = Format.LatestIndex): string {
     let root = ''
@@ -14,7 +9,7 @@ export function getUrl(post: Post, format = Format.LatestIndex): string {
         default:
             break
         case Format.LatestIndex:
-            root = 'posts'
+            root = './posts'
             break
         case Format.YearIndex:
             root = ''

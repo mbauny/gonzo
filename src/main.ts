@@ -1,6 +1,5 @@
-import { newDataBase } from './database'
-import { writeYearsIndex, writeLatestIndex, writeTagsIndex } from './index'
 import * as yargs from 'yargs'
+import { write } from './output/write'
 
 const argv = yargs
     .scriptName('gonzo')
@@ -21,8 +20,4 @@ const argv = yargs
         description: '',
     }).argv
 
-const blogDir = argv.blogDir ?? process.cwd()
-const db = newDataBase(blogDir)
-if (db) writeYearsIndex(db)
-if (db) writeTagsIndex(db)
-if (db) writeLatestIndex(db)
+write(argv.blogDir ?? process.cwd())
