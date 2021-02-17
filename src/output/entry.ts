@@ -2,10 +2,10 @@ import { Post } from 'post'
 import { join } from 'path'
 import { Context } from './context'
 
-export function getUrl(post: Post, format = Context.Latest): string {
+export function getUrl(post: Post, context = Context.Latest): string {
     let root = ''
 
-    switch (format) {
+    switch (context) {
         default:
             break
         case Context.Latest:
@@ -22,9 +22,9 @@ export function getUrl(post: Post, format = Context.Latest): string {
     return join(root, post.url)
 }
 
-export function getDate(date: Date, format = Context.Latest): string {
+export function getDate(date: Date, context = Context.Latest): string {
     const options = {
-        year: format === Context.Years ? undefined : 'numeric',
+        year: context === Context.Years ? undefined : 'numeric',
         month: 'short',
         day: '2-digit',
     }
@@ -32,8 +32,8 @@ export function getDate(date: Date, format = Context.Latest): string {
     return date.toLocaleDateString('en-US', options)
 }
 
-export function getEntry(post: Post, format = Context.Latest): string {
-    const date = getDate(post.date, format)
-    const url = getUrl(post, format)
+export function getEntry(post: Post, context = Context.Latest): string {
+    const date = getDate(post.date, context)
+    const url = getUrl(post, context)
     return `- [${date}] [${post.title}](${url})`
 }
