@@ -11,7 +11,7 @@ const argv = yargs
     .option('blogDir', {
         alias: 'b',
         description: '',
-        default: '/Users/mbauny/sources/gonzo/test/samples',
+        default: 'samples',
         type: 'string',
     })
 

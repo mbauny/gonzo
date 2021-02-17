@@ -9,7 +9,7 @@ describe('database', () => {
         })
 
         test('valid path', () => {
-            const path = 'test/samples'
+            const path = 'samples'
             const db = newDataBase(path)
 
             expect(db).not.toEqual(undefined)

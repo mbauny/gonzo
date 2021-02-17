@@ -4,7 +4,7 @@ import { readFileSync } from 'fs'
 import { join } from 'path'
 
 describe('catalog', () => {
-    const blogDir = 'test/samples'
+    const blogDir = 'samples'
     const db = newDataBase(blogDir)
 
     test('years', () => {

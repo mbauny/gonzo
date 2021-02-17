@@ -3,7 +3,7 @@ import { getDate, getEntry, getUrl } from 'output/entry'
 import { Context } from 'output/context'
 
 describe('entry', () => {
-    const path = 'test/samples/posts/blocking-qobjects-signals.md'
+    const path = 'samples/posts/blocking-qobjects-signals.md'
     const post = newPost(path)
 
     describe('years', () => {

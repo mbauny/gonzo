@@ -5,7 +5,7 @@ import { join } from 'path'
 
 describe('catalog', () => {
     test('landing', () => {
-        const blogDir = 'test/samples'
+        const blogDir = 'samples'
         const db = newDataBase(blogDir)
 
         expect(db).not.toEqual(undefined)

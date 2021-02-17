@@ -9,7 +9,7 @@ describe('post', () => {
         })
 
         test('valid path', () => {
-            const post = newPost('test/samples/posts/blocking-qobjects-signals.md')
+            const post = newPost('samples/posts/blocking-qobjects-signals.md')
 
             expect(post).not.toEqual(undefined)
             expect(post?.title).toEqual('Blocking QObjects signals')
