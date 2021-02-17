@@ -1,11 +1,11 @@
-import { newDataBase } from '../../../database'
+import { newDataBase } from '../database'
+import { getLanding } from '../output/write'
 import { readFileSync } from 'fs'
 import { join } from 'path'
-import { getLanding } from '../../../output/write'
 
 describe('catalog', () => {
     test('landing', () => {
-        const blogDir = './test/samples'
+        const blogDir = 'test/samples'
         const db = newDataBase(blogDir)
 
         expect(db).not.toEqual(undefined)
