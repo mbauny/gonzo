@@ -1,6 +1,6 @@
-import { newPost } from '../post'
-import { getDate, getEntry, getUrl } from '../output/entry'
-import { Context } from '../output/context'
+import { newPost } from 'post'
+import { getDate, getEntry, getUrl } from 'output/entry'
+import { Context } from 'output/context'
 
 describe('entry', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'

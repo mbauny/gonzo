@@ -1,4 +1,4 @@
-import { newDataBase } from '../database'
+import { newDataBase } from 'database'
 
 describe('database', () => {
     describe('construction', () => {

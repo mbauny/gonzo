@@ -1,5 +1,5 @@
-import { newDataBase } from '../database'
-import { getLanding } from '../output/write'
+import { newDataBase } from 'database'
+import { getLanding } from 'output/write'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 

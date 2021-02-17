@@ -1,5 +1,5 @@
-import { newDataBase } from '../database'
-import { getTagsCatalog, getYearsCatalog } from '../output/catalog'
+import { newDataBase } from 'database'
+import { getTagsCatalog, getYearsCatalog } from 'output/catalog'
 import { readFileSync } from 'fs'
 import { join } from 'path'
 
