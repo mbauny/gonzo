@@ -1,6 +1,6 @@
 import { DataBase } from 'database'
 import { getEntry } from './entry'
-import { Format } from './format'
+import { Context } from './context'
 
 export function getYearsCatalog(db: DataBase): string {
     const content = ['# Posts\n']
@@ -15,7 +15,7 @@ export function getYearsCatalog(db: DataBase): string {
             content.push(`## ${year}\n`)
 
             for (const post of posts) {
-                const entry = getEntry(post, Format.YearIndex)
+                const entry = getEntry(post, Context.Years)
                 content.push(entry)
             }
         }
@@ -37,7 +37,7 @@ export function getTagsCatalog(db: DataBase): string {
             content.push(`## ${tag}\n`)
 
             for (const post of posts) {
-                const entry = getEntry(post, Format.TagIndex)
+                const entry = getEntry(post, Context.Tags)
                 content.push(entry)
             }
         }
@@ -63,7 +63,7 @@ export function getLatestCatalog(db: DataBase): string {
             for (const post of posts) {
                 if (currentSize >= maxSize) break
 
-                const entry = getEntry(post, Format.LatestIndex)
+                const entry = getEntry(post, Context.Latest)
                 content.push(entry)
 
                 currentSize++

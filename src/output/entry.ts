@@ -1,20 +1,20 @@
 import { Post } from 'post'
 import { join } from 'path'
-import { Format } from './format'
+import { Context } from './context'
 
-export function getUrl(post: Post, format = Format.LatestIndex): string {
+export function getUrl(post: Post, format = Context.Latest): string {
     let root = ''
 
     switch (format) {
         default:
             break
-        case Format.LatestIndex:
+        case Context.Latest:
             root = './posts'
             break
-        case Format.YearIndex:
+        case Context.Years:
             root = ''
             break
-        case Format.TagIndex:
+        case Context.Tags:
             root = '../posts'
             break
     }
@@ -22,9 +22,9 @@ export function getUrl(post: Post, format = Format.LatestIndex): string {
     return join(root, post.url)
 }
 
-export function getDate(date: Date, format = Format.LatestIndex): string {
+export function getDate(date: Date, format = Context.Latest): string {
     const options = {
-        year: format === Format.YearIndex ? undefined : 'numeric',
+        year: format === Context.Years ? undefined : 'numeric',
         month: 'short',
         day: '2-digit',
     }
@@ -32,7 +32,7 @@ export function getDate(date: Date, format = Format.LatestIndex): string {
     return date.toLocaleDateString('en-US', options)
 }
 
-export function getEntry(post: Post, format = Format.LatestIndex): string {
+export function getEntry(post: Post, format = Context.Latest): string {
     const date = getDate(post.date, format)
     const url = getUrl(post, format)
     return `- [${date}] [${post.title}](${url})`

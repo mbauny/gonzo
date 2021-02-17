@@ -1,6 +1,6 @@
 import { newPost } from '../post'
 import { getDate, getEntry, getUrl } from '../output/entry'
-import { Format } from '../output/format'
+import { Context } from '../output/context'
 
 describe('entry', () => {
     const path = 'test/samples/posts/blocking-qobjects-signals.md'
@@ -14,7 +14,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getUrl(post, Format.YearIndex)
+                const url = getUrl(post, Context.Years)
                 expect(url).toEqual(expectedUrl)
             }
         })
@@ -23,7 +23,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getDate(post.date, Format.YearIndex)
+                const url = getDate(post.date, Context.Years)
                 expect(url).toEqual(expectedDate)
             }
         })
@@ -32,7 +32,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getEntry(post, Format.YearIndex)
+                const url = getEntry(post, Context.Years)
                 const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
                 expect(url).toEqual(expected)
             }
@@ -46,7 +46,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getUrl(post, Format.TagIndex)
+                const url = getUrl(post, Context.Tags)
                 expect(url).toEqual(expectedUrl)
             }
         })
@@ -55,7 +55,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getDate(post.date, Format.TagIndex)
+                const url = getDate(post.date, Context.Tags)
                 expect(url).toEqual(expectedDate)
             }
         })
@@ -64,7 +64,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getEntry(post, Format.TagIndex)
+                const url = getEntry(post, Context.Tags)
                 const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
                 expect(url).toEqual(expected)
             }
@@ -79,7 +79,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getUrl(post, Format.LatestIndex)
+                const url = getUrl(post, Context.Latest)
                 expect(url).toEqual(expectedUrl)
             }
         })
@@ -88,7 +88,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getDate(post.date, Format.LatestIndex)
+                const url = getDate(post.date, Context.Latest)
                 expect(url).toEqual(expectedDate)
             }
         })
@@ -97,7 +97,7 @@ describe('entry', () => {
             expect(post).not.toEqual(undefined)
 
             if (post) {
-                const url = getEntry(post, Format.LatestIndex)
+                const url = getEntry(post, Context.Latest)
                 const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
                 expect(url).toEqual(expected)
             }
