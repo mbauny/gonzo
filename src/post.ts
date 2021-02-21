@@ -1,3 +1,4 @@
+import { isPostFile } from 'utils/isPostFile'
 import { readFileSync } from 'fs'
 import { basename } from 'path'
 
@@ -22,10 +23,19 @@ function isValid(date: Date): boolean {
     return !isNaN(date.getTime())
 }
 
-function extractMetaData(fileContent: string): MetaData | undefined {
+function extractMetaData(file: string): MetaData | undefined {
     let title: string | undefined
     let date: Date | undefined
     let tags: string[] | undefined
+
+    let fileContent: string
+    try {
+        fileContent = readFileSync(file, 'utf-8')
+    } catch (err) {
+        const message = `Error: Cannot read file. Skipping "${file}"`
+        console.error(message)
+        return undefined
+    }
 
     const lines = fileContent.split(/\r?\n/)
     for (const line of lines) {
@@ -51,8 +61,19 @@ function extractMetaData(fileContent: string): MetaData | undefined {
         }
     }
 
+    if (!title) {
+        const message = `Warning: Cannot find post title. Skipping "${file}"`
+        console.warn(message)
+        return undefined
+    }
+
+    if (!date) {
+        const message = `Warning: Cannot find post date. Skipping "${file}"`
+        console.warn(message)
+        return undefined
+    }
+
     if (!tags) tags = ['Uncategorized']
-    if (!title || !date) return undefined
 
     return {
         title,
@@ -62,20 +83,17 @@ function extractMetaData(fileContent: string): MetaData | undefined {
 }
 
 export function newPost(file: string): Post | undefined {
-    try {
-        const utf8 = readFileSync(file, 'utf-8')
-        const metaData = extractMetaData(utf8)
-        if (!metaData) return undefined
+    if (!isPostFile(file)) return undefined
 
-        const fileName = basename(file)
-        const anchor = metaData.title.toLowerCase().replaceAll(' ', '-')
-        const url = `${fileName}#${anchor}`
+    const metaData = extractMetaData(file)
+    if (!metaData) return undefined
 
-        return {
-            url,
-            ...metaData,
-        }
-    } catch (err) {
-        return undefined
+    const fileName = basename(file)
+    const anchor = metaData.title.toLowerCase().replaceAll(' ', '-')
+    const url = `${fileName}#${anchor}`
+
+    return {
+        url,
+        ...metaData,
     }
 }

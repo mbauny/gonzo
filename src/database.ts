@@ -1,5 +1,4 @@
 import { newPost, Post } from './post'
-import { isPostFile } from 'utils/isPostFile'
 import { compareDates } from 'utils/compareDates'
 import { readdirSync } from 'fs'
 import { join } from 'path'
@@ -42,12 +41,10 @@ export function newDataBase(dir: string): DataBase | undefined {
         const files = readdirSync(posts)
 
         for (const file of files) {
-            if (isPostFile(file)) {
-                const path = join(posts, file)
-                const post = newPost(path)
+            const path = join(posts, file)
+            const post = newPost(path)
 
-                if (post) add(post)
-            }
+            if (post) add(post)
         }
 
         return {
@@ -56,6 +53,8 @@ export function newDataBase(dir: string): DataBase | undefined {
             latestPosts: allPosts.sort(comparePosts).slice(0, latestCount),
         }
     } catch (err) {
+        const message = `Error: Cannot find "posts" dir. Aborting parsing of "${dir}"`
+        console.error(message)
         return undefined
     }
 }

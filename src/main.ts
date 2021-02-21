@@ -8,8 +8,8 @@ const argv = yargs
     .alias('v', 'version')
     .help()
     .alias('h', 'help')
-    .option('blogDir', {
-        alias: 'b',
+    .option('dir', {
+        alias: 'd',
         description: '',
         default: 'samples',
         type: 'string',
@@ -20,4 +20,4 @@ const argv = yargs
         description: '',
     }).argv
 
-write(argv.blogDir ?? process.cwd())
+write(argv.dir ?? process.cwd())

@@ -1,11 +1,31 @@
 import { newPost } from '../post'
 
 describe('post', () => {
+    const spyConsoleError = jest.spyOn(console, 'error').mockImplementation()
+
+    beforeEach(() => {
+        spyConsoleError.mockClear()
+    })
+
+    afterAll(() => {
+        spyConsoleError.mockRestore()
+    })
+
     describe('construction', () => {
         test('empty path', () => {
             const post = newPost('')
 
             expect(post).toBeFalsy()
+        })
+
+        test('random path', () => {
+            const post = newPost('samples/posts/this-file-does-not-exist.md')
+
+            expect(post).toBeFalsy()
+            expect(console.error).toHaveBeenCalledTimes(1)
+            expect(console.error).toHaveBeenCalledWith(
+                'Error: Cannot read file. Skipping "samples/posts/this-file-does-not-exist.md"'
+            )
         })
 
         test('valid path', () => {
