@@ -2,7 +2,7 @@ import { Post } from 'post'
 import { join } from 'path'
 import { Context } from './context'
 
-export function getUrl(post: Post, context = Context.Latest): string {
+export function getUrl(post: Post, context: Context): string {
     let root = ''
 
     switch (context) {
@@ -22,7 +22,7 @@ export function getUrl(post: Post, context = Context.Latest): string {
     return join(root, post.url)
 }
 
-export function getDate(date: Date, context = Context.Latest): string {
+export function getDate(date: Date, context: Context): string {
     const options = {
         year: context === Context.Years ? undefined : 'numeric',
         month: 'short',
@@ -32,7 +32,7 @@ export function getDate(date: Date, context = Context.Latest): string {
     return date.toLocaleDateString('en-US', options)
 }
 
-export function getEntry(post: Post, context = Context.Latest): string {
+export function getEntry(post: Post, context: Context): string {
     const date = getDate(post.date, context)
     const url = getUrl(post, context)
     return `- [${date}] [${post.title}](${url})`

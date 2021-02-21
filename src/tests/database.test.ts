@@ -5,7 +5,7 @@ describe('database', () => {
         test('empty path', () => {
             const db = newDataBase('')
 
-            expect(db).toEqual(undefined)
+            expect(db).toBeFalsy()
         })
 
         test('valid path', () => {

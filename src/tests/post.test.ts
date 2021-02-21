@@ -5,13 +5,13 @@ describe('post', () => {
         test('empty path', () => {
             const post = newPost('')
 
-            expect(post).toEqual(undefined)
+            expect(post).toBeFalsy()
         })
 
         test('valid path', () => {
             const post = newPost('samples/posts/blocking-qobjects-signals.md')
 
-            expect(post).not.toEqual(undefined)
+            expect(post).toBeTruthy()
             expect(post?.title).toEqual('Blocking QObjects signals')
 
             const expectedDate = new Date('2019-11-05')
