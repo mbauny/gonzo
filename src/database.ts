@@ -1,6 +1,8 @@
 import { newPost, Post } from './post'
+import { isPostFile } from 'utils/isPostFile'
+import { compareDates } from 'utils/compareDates'
 import { readdirSync } from 'fs'
-import { basename, extname, join } from 'path'
+import { join } from 'path'
 
 export interface DataBase {
     readonly postsByYear: Map<number, Post[]>
@@ -11,21 +13,7 @@ export interface DataBase {
 const latestCount = 5
 
 function comparePosts(post1: Post, post2: Post): number {
-    const date1 = post1.date
-    const date2 = post2.date
-
-    if (date1 < date2) return -1
-    if (date1 > date2) return 1
-    return 0
-}
-
-function isPostFile(file: string): boolean {
-    const md = '.md'
-    if (extname(file) === md) {
-        const name = basename(file, md)
-        return name !== 'README'
-    }
-    return false
+    return compareDates(post1.date, post2.date)
 }
 
 export function newDataBase(dir: string): DataBase | undefined {
