@@ -1,5 +1,5 @@
 import { newPost, Post } from './post'
-import { compareDates } from 'utils/compareDates'
+import { compareDates } from './utils/compareDates'
 import { readdirSync } from 'fs'
 import { join } from 'path'
 

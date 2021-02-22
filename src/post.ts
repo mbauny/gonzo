@@ -1,4 +1,4 @@
-import { isPostFile } from 'utils/isPostFile'
+import { isPostFile } from './utils/isPostFile'
 import { readFileSync } from 'fs'
 import { basename } from 'path'
 
