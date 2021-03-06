@@ -29,16 +29,19 @@ describe('post', () => {
         })
 
         test('valid path', () => {
-            const post = newPost('samples/posts/blocking-qobjects-signals.md')
+            const post = newPost('samples/posts/package-tidiness-prettier-simple.md')
 
             expect(post).toBeTruthy()
-            expect(post?.title).toEqual('Blocking QObjects signals')
 
-            const expectedDate = new Date('2019-11-05')
-            expect(post?.date).toEqual(expectedDate)
+            expect(post?.title).toEqual("Cleaning your package's root: Prettier (The basic case)")
 
-            const expectedTags = ['C++', 'Qt']
-            expect(post?.tags).toEqual(expectedTags)
+            expect(post?.date).toEqual(new Date('2020-05-01'))
+
+            expect(post?.tags).toEqual(['JavaScript', 'NodeJS', 'Prettier', 'VSCode'])
+
+            expect(post?.url).toEqual(
+                'package-tidiness-prettier-simple.md#cleaning-your-packages-root-prettier-the-basic-case'
+            )
         })
     })
 })

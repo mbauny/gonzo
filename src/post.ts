@@ -1,6 +1,6 @@
-import { isPostFile } from './utils/isPostFile'
 import { readFileSync } from 'fs'
 import { basename } from 'path'
+import { isPostFile } from './utils/isPostFile'
 
 export interface Post {
     readonly title: string
@@ -89,7 +89,12 @@ export function newPost(file: string): Post | undefined {
     if (!metaData) return undefined
 
     const fileName = basename(file)
-    const anchor = metaData.title.toLowerCase().replaceAll(' ', '-')
+
+    const anchor = metaData.title
+        .toLowerCase()
+        .replaceAll(' ', '-')
+        .replaceAll(/[\\'\\(\\):]/g, '')
+
     const url = `${fileName}#${anchor}`
 
     return {
