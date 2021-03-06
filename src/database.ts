@@ -1,7 +1,7 @@
-import { newPost, Post } from './post'
-import { compareDates } from './utils/compareDates'
 import { readdirSync } from 'fs'
 import { join } from 'path'
+import { newPost, Post } from './post'
+import { compareDates } from './utils/compareDates'
 
 export interface DataBase {
     readonly postsByYear: Map<number, Post[]>
@@ -24,12 +24,13 @@ export function newDataBase(dir: string): DataBase | undefined {
         const add = function (post: Post): void {
             const year = post.date.getFullYear()
             const postsForYear = [...(postsByYear.get(year) ?? []), post]
+            postsForYear.sort(comparePosts).reverse()
 
             postsByYear.set(year, postsForYear)
 
             for (const tag of post.tags) {
                 const postsForTag = [...(postsByTag.get(tag) ?? []), post]
-                postsForTag.sort(comparePosts)
+                postsForTag.sort(comparePosts).reverse()
 
                 postsByTag.set(tag, postsForTag)
             }
