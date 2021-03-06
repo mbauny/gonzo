@@ -1,5 +1,5 @@
-import { isPostFile } from '../utils/isPostFile'
 import { compareDates } from '../utils/compareDates'
+import { isPostFile } from '../utils/isPostFile'
 
 describe('utils', () => {
     describe('isPostFile', () => {

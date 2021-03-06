@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Context } from 'markdown/context'
+import { getDate, getEntry, getUrl } from 'markdown/entry'
 import { newPost } from 'post'
-import { getDate, getEntry, getUrl } from 'output/entry'
-import { Context } from 'output/context'
 
 describe('entry', () => {
     const path = 'samples/posts/blocking-qobjects-signals.md'

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { newDataBase } from 'database'
-import { getTagsCatalog, getYearsCatalog } from 'output/catalog'
-import { getLanding } from 'output/write'
 import { readFileSync } from 'fs'
+import { getTagsCatalog, getYearsCatalog } from 'markdown/catalog'
+import { getLanding } from 'markdown/write'
 import { join } from 'path'
 
 describe('catalog', () => {

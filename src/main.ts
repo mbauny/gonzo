@@ -1,5 +1,5 @@
 import * as yargs from 'yargs'
-import { write } from './output/write'
+import { write } from './markdown/write'
 
 const argv = yargs
     .scriptName('gonzo')
