@@ -1,5 +1,5 @@
-import { Post } from 'post'
 import { join } from 'path'
+import { Post } from 'post'
 import { Context } from './context'
 
 export function getUrl(post: Post, context: Context): string {
