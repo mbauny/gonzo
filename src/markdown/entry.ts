@@ -24,9 +24,9 @@ export function getUrl(post: Post, context: Context): string {
 
 export function getDate(date: Date, context: Context): string {
     const options = {
-        year: context === Context.Years ? undefined : 'numeric',
-        month: 'short',
-        day: '2-digit',
+        year: context === Context.Years ? undefined : ('numeric' as const),
+        month: 'short' as const,
+        day: '2-digit' as const,
     }
 
     return date.toLocaleDateString('en-US', options)
