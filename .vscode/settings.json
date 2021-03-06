@@ -1,10 +1,13 @@
 {
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": true
+    },
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.detectIndentation": false,
     "editor.formatOnSave": true,
     "editor.insertSpaces": false,
     "editor.tabSize": 4,
     "files.insertFinalNewline": true,
-    "files.trimTrailingWhitespace": true,
-    "prettier.endOfLine": "lf"
+    "files.trimTrailingWhitespace": true
 }
