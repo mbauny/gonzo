@@ -1,6 +1,6 @@
 import { DataBase } from 'database'
-import { getEntry } from './entry'
 import { Context } from './context'
+import { getEntry } from './entry'
 
 export function getYearsCatalog(db: DataBase): string {
     const content = ['# Posts\n']

@@ -1,9 +1,20 @@
-import { DataBase, newDataBase } from '../database'
-import { getLatestCatalog, getTagsCatalog, getYearsCatalog } from './catalog'
 import { writeFileSync } from 'fs'
 import { join } from 'path'
+import { DataBase, newDataBase } from '../database'
+import { getLatestCatalog, getTagsCatalog, getYearsCatalog } from './catalog'
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const prettier = require('prettier')
 
 const README = 'README.md'
+
+function format(str: string): string {
+    return prettier.format(str, {
+        parser: 'markdown',
+        tabWidth: 4,
+        useTabs: true,
+    })
+}
 
 export function getLanding(db: DataBase): string {
     const header = [
@@ -34,11 +45,11 @@ export function write(dir: string): void {
     const db = newDataBase(dir)
     if (!db) return
 
-    const yearsCatalog = getYearsCatalog(db)
+    const yearsCatalog = format(getYearsCatalog(db))
     const yearsPath = join(join(dir, 'posts'), README)
     writeFileSync(yearsPath, yearsCatalog)
 
-    const tagsCatalog = getTagsCatalog(db)
+    const tagsCatalog = format(getTagsCatalog(db))
     const tagsPath = join(join(dir, 'tags'), README)
     writeFileSync(tagsPath, tagsCatalog)
 }
