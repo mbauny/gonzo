@@ -29,7 +29,9 @@ export function getTagsCatalog(db: DataBase): string {
 
     const postsByTag = db.postsByTag
 
-    const tags = [...postsByTag.keys()].sort()
+    const tags = [...postsByTag.keys()].sort((tag1, tag2) =>
+        tag1.localeCompare(tag2, 'en-US', { sensitivity: 'base' })
+    )
 
     for (const tag of tags) {
         const posts = postsByTag.get(tag)
