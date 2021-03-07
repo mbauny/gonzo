@@ -1,5 +1,0 @@
-require 'test/unit'
-require_relative 'tc_post'
-require_relative 'tc_post_entry'
-require_relative 'tc_post_section'
-require_relative 'tc_index'
