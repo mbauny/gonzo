@@ -21,8 +21,8 @@ Gonzo was designed...
 
 Also keep in mind that Gonzo was implemented...
 
--   As an experiment to get started with [Ruby](https://www.ruby-lang.org/en/)
-    -   Absolute beginner here
+-   As a simple fun experiment
+    -   This is absolutely not production ready
 -   Very quickly
     -   In just a few days
     -   After work hours
