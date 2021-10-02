@@ -1,6 +1,5 @@
 import { readFileSync } from 'fs'
-import { basename } from 'path'
-import { isPostFile } from './utils/isPostFile'
+import { basename, extname } from 'path'
 
 export interface Post {
     readonly title: string
@@ -82,8 +81,17 @@ function extractMetaData(file: string): MetaData | undefined {
     }
 }
 
+export function isPost(file: string): boolean {
+    const md = '.md'
+    if (extname(file) === md) {
+        const name = basename(file, md)
+        return name !== 'README'
+    }
+    return false
+}
+
 export function newPost(file: string): Post | undefined {
-    if (!isPostFile(file)) return undefined
+    if (!isPost(file)) return undefined
 
     const metaData = extractMetaData(file)
     if (!metaData) return undefined
