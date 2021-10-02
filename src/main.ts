@@ -12,6 +12,7 @@ const argv = yargs
         alias: 'd',
         description: 'Blog root directory',
         type: 'string',
-    }).argv
+    })
+    .parseSync()
 
 write(argv.dir ?? process.cwd())
