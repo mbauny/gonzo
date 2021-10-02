@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Context } from 'markdown/context'
 import { getDate, getEntry, getUrl } from 'markdown/entry'
 import { newPost } from 'post'
 
@@ -14,19 +13,19 @@ describe('entry', () => {
         const expectedDate = 'Nov 05'
 
         test('url', () => {
-            const url = getUrl(post!, Context.Years)
+            const url = getUrl(post!, 'years')
 
             expect(url).toEqual(expectedUrl)
         })
 
         test('date', () => {
-            const url = getDate(post!.date, Context.Years)
+            const url = getDate(post!.date, 'years')
 
             expect(url).toEqual(expectedDate)
         })
 
         test('entry', () => {
-            const url = getEntry(post!, Context.Years)
+            const url = getEntry(post!, 'years')
             const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
 
             expect(url).toEqual(expected)
@@ -38,43 +37,43 @@ describe('entry', () => {
         const expectedDate = 'Nov 05, 2019'
 
         test('url', () => {
-            const url = getUrl(post!, Context.Tags)
+            const url = getUrl(post!, 'tags')
 
             expect(url).toEqual(expectedUrl)
         })
 
         test('date', () => {
-            const url = getDate(post!.date, Context.Tags)
+            const url = getDate(post!.date, 'tags')
 
             expect(url).toEqual(expectedDate)
         })
 
         test('entry', () => {
-            const url = getEntry(post!, Context.Tags)
+            const url = getEntry(post!, 'tags')
             const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
 
             expect(url).toEqual(expected)
         })
     })
 
-    describe('latest', () => {
+    describe('main', () => {
         const expectedUrl = 'posts/blocking-qobjects-signals.md#blocking-qobjects-signals'
         const expectedDate = 'Nov 05, 2019'
 
         test('url', () => {
-            const url = getUrl(post!, Context.Latest)
+            const url = getUrl(post!, 'main')
 
             expect(url).toEqual(expectedUrl)
         })
 
         test('date', () => {
-            const url = getDate(post!.date, Context.Latest)
+            const url = getDate(post!.date, 'main')
 
             expect(url).toEqual(expectedDate)
         })
 
         test('entry', () => {
-            const url = getEntry(post!, Context.Latest)
+            const url = getEntry(post!, 'main')
             const expected = `- [${expectedDate}] [Blocking QObjects signals](${expectedUrl})`
 
             expect(url).toEqual(expected)

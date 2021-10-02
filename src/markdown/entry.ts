@@ -1,6 +1,7 @@
 import { join } from 'path'
 import { Post } from 'post'
-import { Context } from './context'
+
+export type Context = 'main' | 'years' | 'tags'
 
 export function getUrl(post: Post, context: Context): string {
     let root = ''
@@ -8,13 +9,13 @@ export function getUrl(post: Post, context: Context): string {
     switch (context) {
         default:
             break
-        case Context.Latest:
+        case 'main':
             root = './posts'
             break
-        case Context.Years:
+        case 'years':
             root = ''
             break
-        case Context.Tags:
+        case 'tags':
             root = '../posts'
             break
     }
@@ -24,7 +25,7 @@ export function getUrl(post: Post, context: Context): string {
 
 export function getDate(date: Date, context: Context): string {
     const options = {
-        year: context === Context.Years ? undefined : ('numeric' as const),
+        year: context === 'years' ? undefined : ('numeric' as const),
         month: 'short' as const,
         day: '2-digit' as const,
     }
