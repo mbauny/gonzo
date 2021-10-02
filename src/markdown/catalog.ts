@@ -13,10 +13,8 @@ export function getYearsCatalog(db: DataBase): string {
         if (posts) {
             content.push(`## ${year}\n`)
 
-            for (const post of posts) {
-                const entry = getEntry(post, 'years')
-                content.push(entry)
-            }
+            const entries = posts.map(post => getEntry(post, 'years'))
+            content.push(...entries)
         }
     }
 
@@ -37,10 +35,8 @@ export function getTagsCatalog(db: DataBase): string {
         if (posts) {
             content.push(`## ${tag}\n`)
 
-            for (const post of posts) {
-                const entry = getEntry(post, 'tags')
-                content.push(entry)
-            }
+            const entries = posts.map(post => getEntry(post, 'tags'))
+            content.push(...entries)
         }
     }
 
