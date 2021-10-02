@@ -1,15 +1,13 @@
 import { writeFileSync } from 'fs'
 import { join } from 'path'
+import { format as prettierFormat } from 'prettier'
 import { DataBase, newDataBase } from '../database'
 import { getLatestCatalog, getTagsCatalog, getYearsCatalog } from './catalog'
-
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const prettier = require('prettier')
 
 const README = 'README.md'
 
 function format(str: string): string {
-    return prettier.format(str, {
+    return prettierFormat(str, {
         parser: 'markdown',
         tabWidth: 4,
         useTabs: true,
